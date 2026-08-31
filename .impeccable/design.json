@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-31T01:31:51Z",
+  "title": "Design System: Bridge and Bloom",
+  "extensions": {
+    "colorMeta": {
+      "oxblood": {
+        "role": "primary",
+        "displayName": "Wedding Oxblood",
+        "canonical": "#8f0f1b",
+        "tonalRamp": [
+          "oklch(15% 0.159 24.3)",
+          "oklch(26% 0.159 24.3)",
+          "oklch(38% 0.159 24.3)",
+          "oklch(50% 0.159 24.3)",
+          "oklch(62% 0.159 24.3)",
+          "oklch(74% 0.159 24.3)",
+          "oklch(86% 0.159 24.3)",
+          "oklch(95% 0.159 24.3)"
+        ]
+      },
+      "deep-oxblood": {
+        "role": "primary",
+        "displayName": "Deep Oxblood",
+        "canonical": "#6e0812",
+        "tonalRamp": [
+          "oklch(15% 0.132 24.3)",
+          "oklch(26% 0.132 24.3)",
+          "oklch(38% 0.132 24.3)",
+          "oklch(50% 0.132 24.3)",
+          "oklch(62% 0.132 24.3)",
+          "oklch(74% 0.132 24.3)",
+          "oklch(86% 0.132 24.3)",
+          "oklch(95% 0.132 24.3)"
+        ]
+      },
+      "blush-petal": {
+        "role": "secondary",
+        "displayName": "Pressed Blush Petal",
+        "canonical": "#e9b5c6",
+        "tonalRamp": [
+          "oklch(15% 0.064 357.1)",
+          "oklch(26% 0.064 357.1)",
+          "oklch(38% 0.064 357.1)",
+          "oklch(50% 0.064 357.1)",
+          "oklch(62% 0.064 357.1)",
+          "oklch(74% 0.064 357.1)",
+          "oklch(86% 0.064 357.1)",
+          "oklch(95% 0.064 357.1)"
+        ]
+      },
+      "ivory-paper": {
+        "role": "neutral",
+        "displayName": "Ivory Paper",
+        "canonical": "#f8f3f0",
+        "tonalRamp": [
+          "oklch(15% 0.007 53.4)",
+          "oklch(26% 0.007 53.4)",
+          "oklch(38% 0.007 53.4)",
+          "oklch(50% 0.007 53.4)",
+          "oklch(62% 0.007 53.4)",
+          "oklch(74% 0.007 53.4)",
+          "oklch(86% 0.007 53.4)",
+          "oklch(95% 0.007 53.4)"
+        ]
+      },
+      "deep-ivory-paper": {
+        "role": "neutral",
+        "displayName": "Deep Ivory Paper",
+        "canonical": "#eee5e0",
+        "tonalRamp": [
+          "oklch(15% 0.012 51.3)",
+          "oklch(26% 0.012 51.3)",
+          "oklch(38% 0.012 51.3)",
+          "oklch(50% 0.012 51.3)",
+          "oklch(62% 0.012 51.3)",
+          "oklch(74% 0.012 51.3)",
+          "oklch(86% 0.012 51.3)",
+          "oklch(95% 0.012 51.3)"
+        ]
+      },
+      "black-ink": {
+        "role": "neutral",
+        "displayName": "Black Ink",
+        "canonical": "#171213",
+        "tonalRamp": [
+          "oklch(15% 0.008 4.4)",
+          "oklch(26% 0.008 4.4)",
+          "oklch(38% 0.008 4.4)",
+          "oklch(50% 0.008 4.4)",
+          "oklch(62% 0.008 4.4)",
+          "oklch(74% 0.008 4.4)",
+          "oklch(86% 0.008 4.4)",
+          "oklch(95% 0.008 4.4)"
+        ]
+      },
+      "soft-ink": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#615456",
+        "tonalRamp": [
+          "oklch(15% 0.017 7.3)",
+          "oklch(26% 0.017 7.3)",
+          "oklch(38% 0.017 7.3)",
+          "oklch(50% 0.017 7.3)",
+          "oklch(62% 0.017 7.3)",
+          "oklch(74% 0.017 7.3)",
+          "oklch(86% 0.017 7.3)",
+          "oklch(95% 0.017 7.3)"
+        ]
+      },
+      "porcelain-white": {
+        "role": "neutral",
+        "displayName": "Porcelain White",
+        "canonical": "#fffdfb",
+        "tonalRamp": [
+          "oklch(15% 0.003 67.8)",
+          "oklch(26% 0.003 67.8)",
+          "oklch(38% 0.003 67.8)",
+          "oklch(50% 0.003 67.8)",
+          "oklch(62% 0.003 67.8)",
+          "oklch(74% 0.003 67.8)",
+          "oklch(86% 0.003 67.8)",
+          "oklch(95% 0.003 67.8)"
+        ]
+      },
+      "warm-stone-backdrop": {
+        "role": "neutral",
+        "displayName": "Warm Stone Backdrop",
+        "canonical": "#d7cfca",
+        "tonalRamp": [
+          "oklch(15% 0.011 54.5)",
+          "oklch(26% 0.011 54.5)",
+          "oklch(38% 0.011 54.5)",
+          "oklch(50% 0.011 54.5)",
+          "oklch(62% 0.011 54.5)",
+          "oklch(74% 0.011 54.5)",
+          "oklch(86% 0.011 54.5)",
+          "oklch(95% 0.011 54.5)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Bodoni Ceremony Display",
+        "purpose": "The uppercase Wedding word inside the hero arch."
+      },
+      "headline": {
+        "displayName": "Bodoni Invitation Headline",
+        "purpose": "The formal uppercase invitation heading."
+      },
+      "title": {
+        "displayName": "Alex Brush Intimate Title",
+        "purpose": "The couple's names and person names where affection should soften the formal system."
+      },
+      "body": {
+        "displayName": "Noto Serif Fact Text",
+        "purpose": "Readable Vietnamese family names and addresses."
+      },
+      "label": {
+        "displayName": "Bodoni Formal Label",
+        "purpose": "Uppercase day, time, and family labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "folio-ambient",
+        "value": "0 28px 80px rgba(42, 27, 27, 0.2)",
+        "purpose": "Separates the centered desktop invitation folio from the warm stone canvas; removed on mobile."
+      },
+      {
+        "name": "portrait-copy-veil",
+        "value": "0 2px 16px rgba(0, 0, 0, 0.36)",
+        "purpose": "Protects the save-the-date lockup over the couple portrait."
+      }
+    ],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "560px"
+      },
+      {
+        "name": "narrow",
+        "value": "360px"
+      },
+      {
+        "name": "tall-desktop",
+        "value": "900px and 700px height"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Invitation Folio",
+      "kind": "custom",
+      "refersTo": "invitation-folio",
+      "description": "Centered single-page invitation frame that carries the hero and formal details in sequence.",
+      "html": "<main class=\"ds-folio\"><section class=\"ds-folio-hero\" aria-label=\"Wedding invitation\"><div class=\"ds-folio-arch\">Huyền Trân &amp; Nhựt Hòa</div></section><section class=\"ds-folio-details\">Thư mời tiệc cưới</section></main>",
+      "css": ".ds-folio { width: min(100%, 760px); margin-inline: auto; overflow: hidden; color: var(--color-ink); background: var(--color-paper); box-shadow: 0 28px 80px rgba(42, 27, 27, 0.2); } .ds-folio-details { min-height: 240px; padding: var(--space-8) var(--space-4); font-family: var(--font-display); text-align: center; } @media (max-width: 560px) { .ds-folio { box-shadow: none; } }"
+    },
+    {
+      "name": "Hero Section",
+      "kind": "custom",
+      "refersTo": "hero-arch",
+      "description": "Photographic first view with a save-the-date lockup and ceremonial ivory arch.",
+      "html": "<section class=\"ds-hero\"><div class=\"ds-hero-shade\"></div><header class=\"ds-save-date\"><span>Save the date</span><time>16.09.2026</time></header><div class=\"ds-hero-arch\"><svg class=\"ds-bow\" viewBox=\"0 0 120 78\" aria-hidden=\"true\"><path d=\"M59.5 29.5C45 8 19 7 13 20c-6 13 12 23 46.5 9.5Z\"/><path d=\"M60.5 29.5C75 8 101 7 107 20c6 13-12 23-46.5 9.5Z\"/><circle cx=\"60\" cy=\"30\" r=\"4.5\"/></svg><p>Wedding</p><h1>Huyền Trân &amp; Nhựt Hòa</h1></div></section>",
+      "css": ".ds-hero { position: relative; isolation: isolate; min-height: 420px; overflow: visible; background: #172116; background-image: linear-gradient(180deg, rgba(8, 13, 8, 0.58), rgba(8, 13, 8, 0.06) 32%, rgba(8, 13, 8, 0) 66%); } .ds-hero-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8, 13, 8, 0.58) 0%, rgba(8, 13, 8, 0.06) 32%, rgba(8, 13, 8, 0) 66%); } .ds-save-date { position: absolute; top: var(--space-4); left: var(--space-4); color: var(--color-white); text-shadow: 0 2px 16px rgba(0, 0, 0, 0.36); } .ds-save-date span { display: block; font-family: var(--font-script); font-size: 2rem; line-height: 0.9; } .ds-save-date time { display: block; padding-left: var(--space-2); font-family: var(--font-display); } .ds-hero-arch { position: absolute; right: 50%; bottom: 0; display: flex; width: min(82%, 620px); aspect-ratio: 2 / 1; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 var(--space-4) var(--space-5); color: var(--color-wine); text-align: center; background: var(--color-paper); border-radius: 50% 50% 0 0 / 100% 100% 0 0; transform: translateX(50%); } .ds-hero-arch p { margin: 0; font-family: var(--font-display); font-size: 3rem; line-height: 0.95; letter-spacing: 0.06em; text-transform: uppercase; } .ds-hero-arch h1 { position: absolute; top: calc(100% + var(--space-5)); left: 50%; width: 92vw; margin: 0; font-family: var(--font-script); font-size: 2.25rem; font-weight: 400; line-height: 1; transform: translateX(-50%); } .ds-bow { position: absolute; top: -.5rem; left: 50%; width: 6rem; overflow: visible; fill: var(--color-paper); stroke: var(--color-wine); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; transform: translateX(-50%); } .ds-bow circle { fill: var(--color-wine); }"
+    },
+    {
+      "name": "Invitation Details",
+      "kind": "custom",
+      "refersTo": "invitation-details",
+      "description": "Paper-grain inner page that presents the formal date and two family invitations.",
+      "html": "<section class=\"ds-details\"><header class=\"ds-details-heading\"><h2>Thư mời tiệc cưới</h2><div class=\"ds-rule\"></div><p>Thứ Tư · 09:00</p><time>16.09.2026</time></header><div class=\"ds-family-grid\"><article><h3>Nhà gái</h3><p>Ông Dương Văn Mẫn<br/>Bà Lê Thị Huệ</p></article><article><h3>Nhà trai</h3><p>Bà Dương Thị Yến Xuân</p></article></div></section>",
+      "css": ".ds-details { min-height: 500px; padding: var(--space-8) var(--space-4) var(--space-9); color: var(--color-ink); background-color: var(--color-paper); background-image: url('./assets/paper-grain.svg'); background-repeat: no-repeat; background-size: 100% 100%; } .ds-details-heading { text-align: center; } .ds-details-heading h2 { margin: 0 auto; font-family: var(--font-display); font-size: 2rem; font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; text-transform: uppercase; } .ds-rule { width: 78%; height: 1px; margin: var(--space-2) auto var(--space-6); background: var(--color-ink); } .ds-details-heading p { margin: 0 0 var(--space-3); font-family: var(--font-display); font-weight: 500; text-transform: uppercase; } .ds-details-heading time { display: block; width: fit-content; margin: 0 auto; padding: 0 var(--space-3) var(--space-2); border-bottom: 1px solid var(--color-ink); font-family: var(--font-display); font-size: 2.5rem; font-weight: 500; line-height: 1; } .ds-family-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-8); text-align: center; } .ds-family-grid h3 { margin: 0 0 var(--space-5); font-family: var(--font-display); font-weight: 500; text-transform: uppercase; } .ds-family-grid p { margin: 0; font-family: var(--font-body); line-height: 1.55; }"
+    },
+    {
+      "name": "Family Portrait Pair",
+      "kind": "custom",
+      "refersTo": "family-portrait",
+      "description": "Aligned two-column family presentation joining factual copy, portrait photography, and person titles.",
+      "html": "<div class=\"ds-portrait-pair\"><article><div class=\"ds-family-copy\"><h3>Nhà gái</h3><p>Ông Dương Văn Mẫn<br/>Bà Lê Thị Huệ</p></div><div class=\"ds-portrait\" role=\"img\" aria-label=\"Chân dung cô dâu Huyền Trân\"></div><div class=\"ds-person-title\"><p>Bride</p><h3>Huyền Trân</h3></div></article><article><div class=\"ds-family-copy\"><h3>Nhà trai</h3><p>Bà Dương Thị Yến Xuân</p></div><div class=\"ds-portrait\" role=\"img\" aria-label=\"Chân dung chú rể Nhựt Hòa\"></div><div class=\"ds-person-title\"><p>Groom</p><h3>Nhựt Hòa</h3></div></article></div>",
+      "css": ".ds-portrait-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); text-align: center; } .ds-family-copy { min-height: 190px; } .ds-family-copy h3 { margin: 0 0 var(--space-5); font-family: var(--font-display); font-weight: 500; text-transform: uppercase; } .ds-family-copy p { margin: 0; font-family: var(--font-body); font-size: 0.875rem; line-height: 1.55; } .ds-portrait { width: 100%; aspect-ratio: 0.67; background: var(--color-paper-deep); } .ds-person-title { padding-top: var(--space-5); color: var(--color-wine); } .ds-person-title p { margin: 0; font-family: var(--font-display); font-size: 2.25rem; line-height: 0.9; letter-spacing: 0.03em; text-transform: uppercase; } .ds-person-title h3 { margin: var(--space-2) 0 0; color: var(--color-ink); font-family: var(--font-script); font-size: 2.25rem; font-weight: 400; line-height: 1; white-space: nowrap; }"
+    },
+    {
+      "name": "Bow Mark",
+      "kind": "custom",
+      "refersTo": "bow-mark-hero",
+      "description": "Authored ribbon signature used above the hero arch and beneath the family pair.",
+      "html": "<svg class=\"ds-bow-mark\" viewBox=\"0 0 120 78\" role=\"presentation\" aria-hidden=\"true\"><path d=\"M59.5 29.5C45 8 19 7 13 20c-6 13 12 23 46.5 9.5Z\"/><path d=\"M60.5 29.5C75 8 101 7 107 20c6 13-12 23-46.5 9.5Z\"/><path d=\"M60 30c-11 13-18 27-17 43\"/><path d=\"M60 30c11 13 18 27 17 43\"/><path d=\"M43 73c-2-8-8-13-15-17\"/><path d=\"M77 73c2-8 8-13 15-17\"/><circle cx=\"60\" cy=\"30\" r=\"4.5\"/></svg>",
+      "css": ".ds-bow-mark { width: clamp(5.25rem, 14vw, 8.25rem); overflow: visible; fill: var(--color-paper); stroke: var(--color-wine); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; } .ds-bow-mark circle { fill: var(--color-wine); }"
+    },
+    {
+      "name": "Static Petal Field",
+      "kind": "custom",
+      "refersTo": "invitation-details",
+      "description": "Five sparse, non-interactive blush petals that sit behind the formal invitation details.",
+      "html": "<div class=\"ds-petals\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span><span></span></div>",
+      "css": ".ds-petals { position: relative; height: 150px; pointer-events: none; } .ds-petals span { position: absolute; width: 20px; height: 11px; background: radial-gradient(ellipse at 38% 42%, rgba(255, 236, 243, 0.92), rgba(220, 112, 150, 0.62) 72%, rgba(220, 112, 150, 0.2)); border-radius: 84% 22% 76% 31%; clip-path: polygon(0 41%, 23% 8%, 72% 0, 100% 34%, 82% 79%, 34% 100%, 7% 76%); opacity: 0.74; } .ds-petals span:nth-child(1) { top: 8%; right: 21%; transform: rotate(62deg); } .ds-petals span:nth-child(2) { top: 31%; left: 6%; transform: rotate(18deg) scale(0.72); } .ds-petals span:nth-child(3) { top: 37%; right: 4%; transform: rotate(132deg) scale(0.88); } .ds-petals span:nth-child(4) { right: 23%; bottom: 13%; transform: rotate(42deg) scale(1.12); } .ds-petals span:nth-child(5) { bottom: 25%; left: 47%; transform: rotate(122deg) scale(0.72); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Ivory Vow Folio",
+    "overview": "The Ivory Vow Folio treats the invitation as a vertical piece of wedding stationery brought to life by portrait photography. Ivory paper, black ink, oxblood ceremony lettering, formal hairline rules, and the authored ribbon mark create an intimate printed world; the interface refuses generic app chrome so the couple and the invitation remain the only protagonists.\n\nThe system is formal but tender, with generous vertical pacing, a dense two-family composition, and type that shifts deliberately between Bodoni ceremony, Alex Brush intimacy, and Noto Serif fact. It is mobile-first, static, and tactile: paper grain, still blush petals, restrained photographic shade, and one ambient folio shadow supply atmosphere without animation or transitions.",
+    "keyCharacteristics": [
+      "Portrait-led first viewport with upper-left save-the-date copy.",
+      "Ivory paper and black ink punctuated by rare oxblood ceremony lettering.",
+      "Formal Bodoni display type, intimate Alex Brush names, and readable Noto Serif details.",
+      "A true ivory semicircle and authored ribbon mark as the signature silhouettes.",
+      "Static paper grain and blush petals; no animation or transition language."
+    ],
+    "rules": [
+      {"name":"The Ink-and-Wine Rule","body":"Black ink carries information; oxblood carries ceremony. Do not reverse those responsibilities or spread oxblood across ordinary body copy.","section":"colors"},
+      {"name":"The Paper Rule","body":"Ivory is the default surface. Pure white appears only as legible copy over photography, never as a generic card background.","section":"colors"},
+      {"name":"The Three Voices Rule","body":"Bodoni speaks ceremony, Alex Brush speaks affection, and Noto Serif speaks fact; never collapse all three roles into one family.","section":"typography"},
+      {"name":"The Uppercase Restraint Rule","body":"Reserve uppercase for formal English and Vietnamese labels. Names in script and family addresses retain natural casing.","section":"typography"},
+      {"name":"The Paired-Families Rule","body":"Bride and groom information remains a balanced two-column pair at every shipped breakpoint; compression changes spacing and type size, not the narrative order.","section":"layout"},
+      {"name":"The One-Shadow Rule","body":"Only the complete folio lifts from the desktop canvas; sections, portraits, arches, and decorative marks remain shadowless.","section":"elevation"},
+      {"name":"The Singular Curve Rule","body":"The arch belongs to the hero title and the irregular radius belongs to petals; do not turn either into a generic card radius.","section":"shapes"}
+    ],
+    "dos": [
+      "Do preserve the portrait-led first viewport, upper-left save-the-date lockup, and true bottom semicircle meeting the image-paper boundary as one opening composition.",
+      "Do use Bodoni for ceremony, Alex Brush for affection, and Noto Serif for factual Vietnamese copy.",
+      "Do keep oxblood rare and intentional against ivory paper and black ink.",
+      "Do maintain the permanent two-column family pair while compressing spacing and type at narrow widths.",
+      "Do keep paper grain, petals, ribbon marks, and all typography static."
+    ],
+    "donts": [
+      "Don't introduce generic app bars, dashboards, floating controls, or card grids into the folio world.",
+      "Don't animate or transition petals, ribbons, photographs, type, or sections.",
+      "Don't replace the authored Bow Mark with a library icon or emoji.",
+      "Don't round portrait corners or reuse the hero arch as a generic container shape.",
+      "Don't add internal section shadows; the complete desktop folio owns the only structural shadow."
+    ]
+  }
+}

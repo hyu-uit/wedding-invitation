@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'Alex Brush';
+  src: url('/fonts/alex-brush-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('/fonts/bodoni-moda-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('/fonts/bodoni-moda-medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('/fonts/noto-serif-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --color-paper: #f8f3f0;
+  --color-paper-deep: #eee5e0;
+  --color-ink: #171213;
+  --color-ink-soft: #615456;
+  --color-wine: #8f0f1b;
+  --color-wine-dark: #6e0812;
+  --color-blush: #e9b5c6;
+  --color-white: #fffdfb;
+  --color-backdrop: #d7cfca;
+
+  --font-display: 'Bodoni Moda', 'Times New Roman', serif;
+  --font-body: 'Noto Serif', Georgia, serif;
+  --font-script: 'Alex Brush', cursive;
+
+  --type-section-title: clamp(2.3rem, 7vw, 4.25rem);
+  --type-section-label: clamp(1.1rem, 3.2vw, 1.75rem);
+  --type-section-heading: clamp(1.9rem, 5.2vw, 3rem);
+  --type-emotional-copy: clamp(1.4rem, 3.8vw, 2.05rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-backdrop);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}

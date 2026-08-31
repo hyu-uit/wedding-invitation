@@ -1,0 +1,1181 @@
+.invitation {
+  width: min(100%, 760px);
+  margin-inline: auto;
+  overflow: hidden;
+  background: var(--color-paper);
+  box-shadow: 0 28px 80px rgba(42, 27, 27, 0.2);
+}
+
+.hero-section {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  aspect-ratio: 692 / 1148;
+  min-height: 650px;
+  overflow: visible;
+  background: #172116;
+}
+
+.hero-photo,
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-photo {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.hero-shade {
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 13, 8, 0.58) 0%,
+    rgba(8, 13, 8, 0.06) 32%,
+    rgba(8, 13, 8, 0) 66%
+  );
+}
+
+.save-date {
+  position: absolute;
+  top: clamp(1.25rem, 4vw, 2.25rem);
+  left: clamp(1.25rem, 5vw, 2.75rem);
+  color: var(--color-white);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.36);
+}
+
+.save-date p {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-script);
+  font-size: clamp(1.85rem, 6vw, 3.4rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.save-date time {
+  display: block;
+  padding-left: var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.8vw, 1.4rem);
+  letter-spacing: -0.02em;
+}
+
+.hero-card {
+  position: absolute;
+  right: 50%;
+  bottom: -1px;
+  display: flex;
+  width: min(82%, 620px);
+  height: auto;
+  aspect-ratio: 2 / 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 var(--space-4) clamp(1.25rem, 3vw, 2rem);
+  color: var(--color-wine);
+  text-align: center;
+  background: var(--color-paper);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: translateX(50%);
+}
+
+.hero-bow {
+  position: absolute;
+  top: clamp(-0.75rem, -1.5vw, -0.35rem);
+  left: 50%;
+  width: clamp(5.25rem, 14vw, 8.25rem);
+  overflow: visible;
+  fill: var(--color-paper);
+  stroke: var(--color-wine);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: translateX(-50%);
+}
+
+.hero-bow circle {
+  fill: var(--color-wine);
+}
+
+.wedding-word {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 9vw, 5.4rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-card h1 {
+  position: absolute;
+  top: calc(100% + clamp(1.25rem, 4vw, 2.5rem));
+  left: 50%;
+  width: min(92vw, 700px);
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  transform: translateX(-50%);
+}
+
+.details-section {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  min-height: 100vh;
+  padding: clamp(6.25rem, 25vw, 12rem) clamp(1.25rem, 5vw, 3rem)
+    var(--space-9);
+  overflow: hidden;
+  background-color: var(--color-paper);
+  background-image: url('./assets/paper-grain.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.invitation-heading {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.invitation-heading h2 {
+  max-width: 18ch;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.heading-rule {
+  width: min(78%, 470px);
+  height: 1px;
+  margin: var(--space-2) auto var(--space-6);
+  background: var(--color-ink);
+}
+
+.invitation-heading p {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.invitation-heading time {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0 var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 6vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.families {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 6vw, 3.25rem);
+  margin-top: var(--space-8);
+}
+
+.family {
+  min-width: 0;
+  text-align: center;
+}
+
+.family-copy {
+  display: flex;
+  min-height: 190px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.family-copy h3 {
+  margin: 0 0 var(--space-5);
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.family-copy p,
+.family-copy address {
+  margin: 0;
+  font-size: clamp(0.83rem, 2.45vw, 1.18rem);
+  font-style: normal;
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+.family-copy p {
+  text-transform: uppercase;
+}
+
+.family-copy address {
+  margin-top: var(--space-3);
+}
+
+.family img {
+  width: 100%;
+  aspect-ratio: 0.67;
+  object-fit: cover;
+  object-position: center;
+  background: var(--color-paper-deep);
+}
+
+.person-title {
+  padding-top: var(--space-5);
+  color: var(--color-wine);
+}
+
+.person-title p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.7rem);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.person-title h3 {
+  margin: var(--space-2) 0 0;
+  color: var(--color-ink);
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 6vw, 3.55rem);
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.families-bow {
+  position: absolute;
+  right: 50%;
+  bottom: 1.4rem;
+  width: clamp(2.3rem, 6vw, 3.6rem);
+  fill: var(--color-paper);
+  stroke: var(--color-wine);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: translateX(50%);
+}
+
+.families-bow circle {
+  fill: var(--color-wine);
+}
+
+.petals {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.petals span {
+  position: absolute;
+  width: 20px;
+  height: 11px;
+  background: radial-gradient(
+    ellipse at 38% 42%,
+    rgba(255, 236, 243, 0.92),
+    rgba(220, 112, 150, 0.62) 72%,
+    rgba(220, 112, 150, 0.2)
+  );
+  border-radius: 84% 22% 76% 31%;
+  clip-path: polygon(0 41%, 23% 8%, 72% 0, 100% 34%, 82% 79%, 34% 100%, 7% 76%);
+  opacity: 0.74;
+}
+
+.petals span:nth-child(1) {
+  top: 8%;
+  right: 21%;
+  transform: rotate(62deg);
+}
+
+.petals span:nth-child(2) {
+  top: 31%;
+  left: 6%;
+  transform: rotate(18deg) scale(0.72);
+}
+
+.petals span:nth-child(3) {
+  top: 37%;
+  right: 4%;
+  transform: rotate(132deg) scale(0.88);
+}
+
+.petals span:nth-child(4) {
+  right: 23%;
+  bottom: 13%;
+  transform: rotate(42deg) scale(1.12);
+}
+
+.petals span:nth-child(5) {
+  bottom: 25%;
+  left: 47%;
+  transform: rotate(122deg) scale(0.72);
+}
+
+.ceremony-section {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(3.5rem, 9vw, 5.5rem) clamp(1rem, 5vw, 2.5rem)
+    clamp(4rem, 10vw, 6.25rem);
+  overflow: hidden;
+  color: var(--color-ink);
+  text-align: center;
+  background-color: var(--color-paper);
+  background-image: url('./assets/paper-grain.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.ceremony-love {
+  margin: 0 0 clamp(0.5rem, 2vw, 0.9rem);
+  color: var(--color-wine);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.19em;
+}
+
+.ceremony-portrait {
+  width: min(70%, 470px);
+  margin: 0 auto;
+  background: var(--color-paper-deep);
+}
+
+.ceremony-portrait img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.ceremony-script {
+  margin: clamp(1.5rem, 4vw, 2.25rem) 0 0;
+  color: var(--color-wine);
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.ceremony-section h2 {
+  margin: clamp(0.9rem, 2.5vw, 1.25rem) 0 0;
+  color: var(--color-wine);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.ceremony-date {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.75rem, 4vw, 2rem);
+  width: min(100%, 680px);
+  margin: clamp(2.5rem, 7vw, 4.25rem) auto 0;
+  color: var(--color-wine);
+  font-family: var(--font-display);
+}
+
+.ceremony-date-side {
+  display: grid;
+  min-width: 0;
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  align-items: center;
+  font-size: clamp(1.3rem, 4vw, 2.6rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ceremony-date-month {
+  justify-items: start;
+  text-align: left;
+}
+
+.ceremony-date-year {
+  justify-items: end;
+  text-align: right;
+}
+
+.ceremony-rule {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--color-ink);
+}
+
+.ceremony-date-center {
+  display: flex;
+  min-width: 4.5rem;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ceremony-date-center > span {
+  font-size: clamp(1.35rem, 4vw, 2.35rem);
+}
+
+.ceremony-day {
+  margin-top: clamp(0.7rem, 2vw, 1rem);
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 12vw, 7rem);
+  font-weight: 500;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+}
+
+.ceremony-time {
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
+}
+
+.ceremony-lunar {
+  margin: clamp(1.75rem, 5vw, 2.75rem) 0 0;
+  font-size: clamp(0.85rem, 2.2vw, 1.2rem);
+  line-height: 1.5;
+}
+
+.welcome-section {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(4.25rem, 10vw, 7rem) clamp(1rem, 5vw, 2.5rem)
+    clamp(4rem, 10vw, 6.25rem);
+  overflow: hidden;
+  color: var(--color-ink);
+  text-align: center;
+  background-color: var(--color-paper);
+  background-image: url('./assets/paper-grain.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.welcome-photo-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(80%, 620px);
+  margin: 0 auto;
+  padding-top: clamp(2.75rem, 7vw, 4.75rem);
+}
+
+.welcome-title-art {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(5rem, 14vw, 8rem);
+  overflow: visible;
+  color: var(--color-ink);
+}
+
+.welcome-title-art path {
+  fill: none;
+}
+
+.welcome-title-art text {
+  fill: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-anchor: middle;
+}
+
+.welcome-portrait {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-paper-deep);
+  border-radius: 50% 50% 0 0 / 16% 16% 0 0;
+}
+
+.welcome-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.welcome-calendar {
+  position: absolute;
+  bottom: -4%;
+  left: 50%;
+  width: 84%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: rgba(232, 237, 220, 0.6);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.welcome-calendar-grid {
+  position: absolute;
+  inset: 14% 10% 13%;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  align-items: center;
+  color: var(--color-wine-dark);
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 2vw, 1.2rem);
+  line-height: 1;
+}
+
+.calendar-day {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 1.5rem;
+  place-items: center;
+}
+
+.calendar-day-marked svg {
+  position: absolute;
+  width: clamp(2rem, 5vw, 3rem);
+  height: auto;
+  overflow: visible;
+  fill: none;
+  stroke: var(--color-blush);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.calendar-day-marked > span {
+  position: relative;
+  z-index: 1;
+  color: var(--color-blush);
+}
+
+.welcome-verse {
+  position: relative;
+  z-index: 1;
+  max-width: 36ch;
+  margin: clamp(1.75rem, 5vw, 2.75rem) auto 0;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.7vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.welcome-verse span {
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.address-section {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(2.5rem, 7vw, 4.5rem) clamp(1rem, 4vw, 1.75rem)
+    clamp(6.5rem, 13vw, 9rem);
+  overflow: hidden;
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  background-image: url('./assets/paper-grain.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.address-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: clamp(0.75rem, 3vw, 1.5rem);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.address-portrait {
+  aspect-ratio: 2 / 3;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-paper-deep);
+}
+
+.address-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.address-content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(0.5rem, 2vw, 1.25rem) 0 0;
+  text-align: center;
+}
+
+.address-content h2 {
+  margin: 0;
+  color: var(--color-wine);
+  font-family: var(--font-display);
+  font-size: var(--type-section-title);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+}
+
+.address-content h3 {
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--type-section-label);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.address-content > p {
+  margin: clamp(0.8rem, 2vw, 1.25rem) 0 0;
+  font-size: clamp(0.8rem, 2.2vw, 1.15rem);
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.map-placeholder {
+  display: flex;
+  width: min(100%, 265px);
+  min-height: clamp(9rem, 22vw, 12rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: clamp(1.75rem, 5vw, 3rem);
+  padding: 1rem;
+  color: var(--color-wine-dark);
+  text-align: center;
+  background-color: var(--color-paper-deep);
+  border: 1px solid var(--color-wine);
+}
+
+.map-placeholder svg {
+  width: clamp(1.75rem, 5vw, 2.5rem);
+  fill: none;
+  stroke: var(--color-wine);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.map-placeholder span {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  text-transform: uppercase;
+}
+
+.map-placeholder small {
+  max-width: 18ch;
+  color: var(--color-ink-soft);
+  font-size: clamp(0.68rem, 1.8vw, 0.85rem);
+  line-height: 1.35;
+}
+
+.address-countdown {
+  position: absolute;
+  right: 0;
+  bottom: clamp(-3.5rem, -6vw, -2.75rem);
+  left: 29%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.5rem, 2.5vw, 1.5rem);
+}
+
+.countdown-item {
+  display: flex;
+  min-width: 0;
+  min-height: clamp(5.25rem, 13vw, 6.5rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.35rem;
+  color: var(--color-white);
+  text-align: center;
+  background: var(--color-wine-dark);
+  border-radius: 0.35rem;
+}
+
+.countdown-item strong,
+.countdown-item span {
+  line-height: 1.1;
+}
+
+.countdown-item strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 3vw, 1.65rem);
+  font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.countdown-item span {
+  margin-top: 0.25rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.gallery-section {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(52rem, 145vw, 72rem);
+  padding: clamp(3rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.75rem)
+    clamp(4rem, 10vw, 6rem);
+  overflow: hidden;
+  background-color: var(--color-paper);
+  background-image: url('./assets/paper-grain.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.gallery-backdrop,
+.gallery-wash {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-backdrop {
+  z-index: -2;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.2;
+}
+
+.gallery-wash {
+  z-index: -1;
+  background: rgba(248, 243, 240, 0.48);
+}
+
+.gallery-collage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2rem, 7vw, 4rem);
+  width: min(88%, 650px);
+  margin: 0 auto;
+}
+
+.gallery-board {
+  aspect-ratio: 3 / 2;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.gallery-board img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-board-primary {
+  width: 92%;
+  margin-left: auto;
+}
+
+.gallery-board-secondary {
+  width: 96%;
+  margin-left: -4%;
+}
+
+.response-section {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(48rem, 122vw, 58rem);
+  padding: clamp(3.25rem, 8vw, 5rem) clamp(1.25rem, 8vw, 4.5rem)
+    clamp(4.5rem, 10vw, 6rem);
+  overflow: hidden;
+  color: var(--color-ink);
+  text-align: center;
+  background-color: var(--color-paper);
+  background-image: url('./assets/paper-grain.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.response-heading,
+.wish-invitation {
+  position: relative;
+  z-index: 1;
+}
+
+.response-heading > p:first-child {
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2.4vw, 1.2rem);
+  letter-spacing: 0.35em;
+}
+
+.response-heading h2 {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--type-section-heading);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.response-description {
+  max-width: 35ch;
+  margin: clamp(1.25rem, 3vw, 1.75rem) auto 0;
+  color: var(--color-ink-soft);
+  font-size: clamp(0.95rem, 2.7vw, 1.35rem);
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+.response-button {
+  display: inline-flex;
+  min-height: 3.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: clamp(1.5rem, 4vw, 2.25rem);
+  padding: 0.85rem clamp(1.75rem, 5vw, 2.75rem);
+  color: var(--color-white);
+  background: var(--color-wine-dark);
+  border: 0;
+  border-radius: 999px;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.response-button svg {
+  width: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.response-button span {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.8vw, 1.35rem);
+  font-weight: 400;
+}
+
+.wish-invitation {
+  margin-top: clamp(7rem, 18vw, 10rem);
+}
+
+.wish-illustration {
+  width: clamp(9rem, 28vw, 13rem);
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.wish-envelope-back {
+  fill: var(--color-wine);
+  opacity: 0.78;
+}
+
+.wish-letter {
+  fill: var(--color-paper-deep);
+  stroke: var(--color-wine);
+  stroke-width: 2;
+}
+
+.wish-letter-line,
+.wish-envelope-fold,
+.wish-flower-stem,
+.wish-flower-center {
+  fill: none;
+  stroke: var(--color-wine-dark);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.wish-envelope-front {
+  fill: var(--color-blush);
+}
+
+.wish-leaf {
+  fill: var(--color-paper-deep);
+  stroke: var(--color-wine);
+  stroke-width: 2;
+}
+
+.wish-flower {
+  fill: var(--color-paper);
+  stroke: var(--color-wine);
+  stroke-width: 2;
+}
+
+.wish-heart {
+  fill: var(--color-wine);
+}
+
+.wish-heart-small {
+  opacity: 0.72;
+}
+
+.wish-invitation p {
+  margin: var(--space-5) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--type-emotional-copy);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.wish-invitation p span {
+  display: block;
+}
+
+.closing-section {
+  color: var(--color-wine);
+  text-align: center;
+  background-color: var(--color-paper);
+  background-image: url('./assets/paper-grain.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.closing-portrait {
+  aspect-ratio: 2 / 3;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-paper-deep);
+}
+
+.closing-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.closing-footer {
+  padding: clamp(3rem, 8vw, 5rem) var(--space-5)
+    clamp(3.5rem, 9vw, 5.5rem);
+}
+
+.closing-footer p {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: clamp(2.25rem, 7vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+@media (max-width: 560px) {
+  .invitation {
+    box-shadow: none;
+  }
+
+  .hero-section {
+    min-height: 620px;
+  }
+
+  .details-section {
+    padding-inline: var(--space-4);
+    padding-bottom: var(--space-8);
+  }
+
+  .heading-rule {
+    margin-bottom: var(--space-5);
+  }
+
+  .families {
+    gap: var(--space-4);
+    margin-top: var(--space-7);
+  }
+
+  .family-copy {
+    min-height: 220px;
+  }
+
+  .family-copy h3 {
+    margin-bottom: var(--space-4);
+  }
+
+  .family-copy p,
+  .family-copy address {
+    font-size: 0.875rem;
+  }
+
+  .person-title {
+    padding-top: var(--space-4);
+  }
+
+  .families-bow {
+    bottom: 0.9rem;
+  }
+
+  .ceremony-section {
+    padding-inline: var(--space-4);
+  }
+
+  .ceremony-portrait {
+    width: min(78%, 470px);
+  }
+
+  .ceremony-date {
+    gap: clamp(0.5rem, 3vw, 1rem);
+  }
+
+  .ceremony-date-side {
+    font-size: clamp(1.15rem, 4.5vw, 2rem);
+  }
+
+  .ceremony-date-center {
+    min-width: 3.75rem;
+  }
+
+  .welcome-section {
+    padding-inline: var(--space-4);
+  }
+
+  .welcome-photo-wrap {
+    width: min(88%, 620px);
+  }
+
+  .welcome-title-art text {
+    font-size: 32px;
+  }
+
+  .welcome-calendar-grid {
+    inset-inline: 8%;
+    font-size: clamp(0.68rem, 2.25vw, 1rem);
+  }
+
+  .address-section {
+    padding-inline: var(--space-4);
+    padding-bottom: var(--space-8);
+  }
+
+  .address-layout {
+    gap: 0.65rem;
+  }
+
+  .address-content {
+    padding-top: 0.35rem;
+  }
+
+  .address-content h3 {
+    margin-top: var(--space-5);
+  }
+
+  .address-content > p {
+    font-size: clamp(0.7rem, 2.1vw, 0.95rem);
+  }
+
+  .map-placeholder {
+    min-height: 8.5rem;
+    margin-top: var(--space-5);
+    padding-inline: 0.5rem;
+  }
+
+  .address-countdown {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    grid-column: 1 / -1;
+    gap: 0.5rem;
+    margin-top: var(--space-2);
+  }
+
+  .countdown-item {
+    min-height: 5rem;
+    padding-inline: 0.15rem;
+  }
+
+  .gallery-section {
+    min-height: 0;
+    padding-inline: var(--space-4);
+  }
+
+  .gallery-collage {
+    width: 100%;
+    gap: var(--space-7);
+  }
+
+  .gallery-board-primary,
+  .gallery-board-secondary {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .response-section {
+    min-height: 48rem;
+    padding-inline: var(--space-5);
+  }
+
+  .wish-invitation {
+    margin-top: var(--space-10);
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-section {
+    min-height: 580px;
+  }
+
+  .family-copy {
+    min-height: 230px;
+  }
+
+  .family-copy p,
+  .family-copy address {
+    font-size: 0.8125rem;
+  }
+}
+
+@media (min-width: 900px) and (min-height: 700px) {
+  .hero-section {
+    height: 100svh;
+    max-height: 1260px;
+    aspect-ratio: auto;
+  }
+
+  .hero-photo {
+    object-position: 50% 48%;
+  }
+}
