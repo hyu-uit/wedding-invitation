@@ -16,10 +16,10 @@ function WelcomeSection() {
       <div className="welcome-photo-wrap">
         <svg
           className="welcome-title-art"
-          viewBox="0 0 620 150"
+          viewBox="0 0 620 390"
           aria-hidden="true"
         >
-          <path id="welcome-curve" d="M 45 124 Q 310 5 575 124" />
+          <path id="welcome-curve" d="M 10 360 A 300 300 0 0 1 610 360" />
           <text>
             <textPath href="#welcome-curve" startOffset="50%">
               WELCOME TO OUR WEDDING

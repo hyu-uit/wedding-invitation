@@ -30,3 +30,29 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+## Lưu lời chúc vào Google Sheet
+
+Biểu mẫu lời chúc gửi một `POST` đến Google Apps Script Web App. Tạo một Google
+Sheet với hàng đầu tiên là `submittedAt`, `name`, `attendance`, `wish`, sau đó mở
+**Extensions → Apps Script** và dán đoạn mã sau:
+
+```js
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0]
+  const data = JSON.parse(e.postData.contents)
+  sheet.appendRow([data.submittedAt, data.name, data.attendance, data.wish])
+  return ContentService
+    .createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON)
+}
+```
+
+Deploy script as **Web app**, chọn “Anyone” ở mục quyền truy cập, rồi copy URL
+`/exec` vào file `.env` (xem `.env.example`):
+
+```bash
+VITE_GOOGLE_SHEET_ENDPOINT=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
+```
+
+Khởi động lại Vite sau khi thay đổi biến môi trường. Không commit file `.env`.

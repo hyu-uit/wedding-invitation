@@ -818,7 +818,7 @@ body.cover-is-open {
   position: relative;
   isolation: isolate;
   padding: clamp(2.5rem, 6vw, 3.5rem) clamp(1rem, 5vw, 2.5rem)
-    clamp(4rem, 10vw, 6.25rem);
+    clamp(1rem, 3vw, 2rem);
   overflow: hidden;
   color: var(--color-ink);
   text-align: center;
@@ -950,7 +950,7 @@ body.cover-is-open {
 .welcome-section {
   position: relative;
   isolation: isolate;
-  padding: clamp(4.25rem, 10vw, 7rem) clamp(1rem, 5vw, 2.5rem)
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 5vw, 2.5rem)
     clamp(4rem, 10vw, 6.25rem);
   overflow: hidden;
   color: var(--color-ink);
@@ -974,7 +974,7 @@ body.cover-is-open {
   top: 0;
   left: 0;
   width: 100%;
-  height: clamp(5rem, 14vw, 8rem);
+  height: auto;
   overflow: visible;
   color: var(--color-ink);
 }
@@ -998,19 +998,19 @@ body.cover-is-open {
   margin: 0;
   overflow: hidden;
   background: var(--color-paper-deep);
-  border-radius: 50% 50% 0 0 / 16% 16% 0 0;
+  border-radius: 50% 50% 0 0 / 32% 32% 0 0;
 }
 
 .welcome-portrait img {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 110%;
+  width: 150%;
   max-width: none;
-  height: 110%;
+  height: 150%;
   object-fit: cover;
   object-position: center top;
-  transform: translate(-50%, -5%);
+  transform: translate(-50%, -20%);
 }
 
 .welcome-calendar {
@@ -1379,8 +1379,22 @@ body.cover-is-open {
   background: var(--color-wine-dark);
   border: 0;
   border-radius: 999px;
-  cursor: not-allowed;
-  opacity: 1;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.response-button:hover {
+  background: var(--color-wine);
+  transform: translateY(-2px);
+}
+
+.response-button:focus-visible,
+.wish-modal-submit:focus-visible,
+.wish-modal-close:focus-visible,
+.wish-modal input:focus-visible,
+.wish-modal textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-wine) 38%, transparent);
+  outline-offset: 3px;
 }
 
 .response-button svg {
@@ -1464,6 +1478,306 @@ body.cover-is-open {
 
 .wish-invitation p span {
   display: block;
+}
+
+.wish-modal-backdrop {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: grid;
+  padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right))
+    max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+  place-items: center;
+  background: rgba(23, 18, 19, 0.62);
+  animation: wish-backdrop-enter 180ms ease-out both;
+}
+
+.wish-modal {
+  position: relative;
+  width: min(100%, 32rem);
+  max-height: min(42rem, calc(100svh - 2.5rem));
+  overflow: auto;
+  padding: clamp(2rem, 6vw, 3.25rem) clamp(1.35rem, 6vw, 3.25rem)
+    clamp(1.5rem, 5vw, 2.5rem);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  background-image: url('./assets/paper-grain.svg');
+  background-size: 100% 100%;
+  border: 1px solid color-mix(in srgb, var(--color-wine) 25%, transparent);
+  box-shadow: 0 24px 70px rgba(42, 27, 27, 0.3);
+  animation: wish-modal-enter 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.wish-modal::before {
+  position: absolute;
+  inset: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-wine) 28%, transparent);
+  pointer-events: none;
+  content: '';
+}
+
+.wish-modal > * {
+  position: relative;
+  z-index: 1;
+}
+
+.wish-modal-close {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  place-items: center;
+  color: var(--color-wine-dark);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-wine) 30%, transparent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.wish-modal-close span {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.wish-modal-kicker {
+  margin: 0;
+  color: var(--color-wine);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.wish-modal h2 {
+  margin: 0.65rem 0 0;
+  color: var(--color-wine-dark);
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 7vw, 2.65rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.wish-modal-description {
+  max-width: 34ch;
+  margin: 0.8rem auto 1.5rem;
+  color: var(--color-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.wish-modal form {
+  display: grid;
+  gap: 0.55rem;
+  text-align: left;
+}
+
+.attendance-fieldset {
+  min-width: 0;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  border: 0;
+}
+
+.attendance-fieldset legend {
+  margin-bottom: 0.7rem;
+  color: var(--color-wine-dark);
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.attendance-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.wish-modal .attendance-option {
+  position: relative;
+  display: grid;
+  min-height: 4.9rem;
+  margin: 0;
+  padding: 0.8rem 0.75rem;
+  align-items: center;
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-white) 68%, var(--color-paper));
+  border: 1px solid color-mix(in srgb, var(--color-ink-soft) 30%, transparent);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.wish-modal .attendance-option:hover {
+  border-color: color-mix(in srgb, var(--color-wine) 58%, transparent);
+}
+
+.wish-modal .attendance-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.attendance-option-content {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  align-items: center;
+  gap: 0.45rem;
+  padding-right: 1.65rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 2.7vw, 0.95rem);
+  line-height: 1.35;
+}
+
+.attendance-option-content svg {
+  width: 2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.attendance-check {
+  position: absolute;
+  top: 50%;
+  right: 0.65rem;
+  display: grid;
+  width: 1.55rem;
+  height: 1.55rem;
+  place-items: center;
+  color: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-ink-soft) 48%, transparent);
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  transform: translateY(-50%);
+}
+
+.wish-modal .attendance-option:has(input:checked) {
+  background: var(--color-white);
+  border-color: var(--color-ink);
+}
+
+.attendance-option input:checked ~ .attendance-check {
+  color: var(--color-white);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.wish-modal .attendance-option:has(input:focus-visible) {
+  outline: 3px solid color-mix(in srgb, var(--color-wine) 38%, transparent);
+  outline-offset: 3px;
+}
+
+.wish-modal label {
+  margin-top: 0.55rem;
+  color: var(--color-wine-dark);
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.wish-modal input:not([type='radio']),
+.wish-modal textarea {
+  width: 100%;
+  padding: 0.78rem 0.85rem;
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-white) 70%, var(--color-paper));
+  border: 1px solid color-mix(in srgb, var(--color-wine) 30%, transparent);
+  border-radius: 0;
+}
+
+.wish-modal textarea {
+  min-height: 7.5rem;
+  resize: vertical;
+}
+
+.wish-modal input:not([type='radio'])::placeholder,
+.wish-modal textarea::placeholder {
+  color: color-mix(in srgb, var(--color-ink-soft) 78%, var(--color-paper));
+}
+
+.wish-modal-submit {
+  min-height: 3rem;
+  margin-top: 1rem;
+  padding: 0.72rem 1.25rem;
+  color: var(--color-white);
+  background: var(--color-wine-dark);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.wish-modal-submit:hover:not(:disabled) {
+  background: var(--color-wine);
+}
+
+.wish-modal-submit:disabled,
+.wish-modal-close:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.wish-modal-error {
+  margin: 0.45rem 0 0;
+  color: var(--color-wine-dark);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.wish-modal-success {
+  padding: 1.2rem 0.4rem 0.2rem;
+  text-align: center;
+}
+
+.wish-modal-seal {
+  display: grid;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin: 0 auto 1rem;
+  place-items: center;
+  color: var(--color-wine);
+  border: 1px solid color-mix(in srgb, var(--color-wine) 45%, transparent);
+  border-radius: 50%;
+  font-size: 1.8rem;
+}
+
+.wish-modal-success p {
+  margin: 0.8rem auto 0;
+  max-width: 28ch;
+  color: var(--color-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+@keyframes wish-backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes wish-modal-enter {
+  from { opacity: 0; transform: translateY(1rem) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .response-button,
+  .wish-modal-backdrop,
+  .wish-modal {
+    animation: none;
+    transition: none;
+  }
 }
 
 .closing-section {
@@ -1684,6 +1998,66 @@ body.cover-is-open {
 
   .wish-invitation {
     margin-top: var(--space-10);
+  }
+
+  .wish-modal-backdrop {
+    padding: max(0.75rem, env(safe-area-inset-top))
+      max(0.75rem, env(safe-area-inset-right))
+      max(0.75rem, env(safe-area-inset-bottom))
+      max(0.75rem, env(safe-area-inset-left));
+  }
+
+  .wish-modal {
+    max-height: calc(100svh - 1.5rem);
+    padding: 2rem 1.35rem 1.5rem;
+  }
+
+  .wish-modal-kicker {
+    font-size: 0.65rem;
+  }
+
+  .wish-modal-title {
+    text-align: center;
+  }
+
+  .wish-modal h2 {
+    margin-top: 0.45rem;
+    font-size: 1.75rem;
+  }
+
+  .wish-modal-description {
+    max-width: 31ch;
+    margin-block: 0.65rem 1.25rem;
+    font-size: 0.82rem;
+  }
+
+  .attendance-fieldset legend,
+  .wish-modal label {
+    font-size: 0.88rem;
+  }
+
+  .attendance-option-content {
+    grid-template-columns: 1.6rem 1fr;
+    gap: 0.35rem;
+    padding-right: 1.45rem;
+    font-size: 0.72rem;
+  }
+
+  .attendance-option-content svg {
+    width: 1.6rem;
+  }
+
+  .attendance-check {
+    right: 0.55rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    font-size: 0.72rem;
+  }
+
+  .wish-modal input:not([type='radio']),
+  .wish-modal textarea,
+  .wish-modal-submit {
+    font-size: 0.85rem;
   }
 }
 
