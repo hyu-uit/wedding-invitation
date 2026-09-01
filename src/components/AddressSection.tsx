@@ -1,13 +1,55 @@
-import addressCouple from '../assets/photos/address-couple.jpg'
+import { useEffect, useState } from "react";
 
-const countdownItems = [
-  { value: '15', label: 'ngày' },
-  { value: '21', label: 'giờ' },
-  { value: '46', label: 'phút' },
-  { value: '30', label: 'giây' },
-]
+import addressCouple from "../assets/photos/address-couple.jpg";
+
+const weddingTime = new Date("2026-09-16T09:00:00+07:00").getTime();
+
+function getCountdown() {
+  const remaining = Math.max(weddingTime - Date.now(), 0);
+
+  return {
+    remaining,
+    days: Math.floor(remaining / 86_400_000),
+    hours: Math.floor((remaining / 3_600_000) % 24),
+    minutes: Math.floor((remaining / 60_000) % 60),
+    seconds: Math.floor((remaining / 1_000) % 60),
+  };
+}
+
+function formatCountdownValue(value: number) {
+  return value.toString().padStart(2, "0");
+}
 
 function AddressSection() {
+  const [countdown, setCountdown] = useState(getCountdown);
+
+  useEffect(() => {
+    let timeoutId: number;
+
+    const updateCountdown = () => {
+      const nextCountdown = getCountdown();
+      setCountdown(nextCountdown);
+
+      if (nextCountdown.remaining > 0) {
+        timeoutId = window.setTimeout(
+          updateCountdown,
+          1_000 - (Date.now() % 1_000),
+        );
+      }
+    };
+
+    updateCountdown();
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
+  const countdownItems = [
+    { value: countdown.days, label: "ngày" },
+    { value: countdown.hours, label: "giờ" },
+    { value: countdown.minutes, label: "phút" },
+    { value: countdown.seconds, label: "giây" },
+  ];
+
   return (
     <section className="address-section" aria-labelledby="address-title">
       <div className="petals address-petals" aria-hidden="true">
@@ -29,33 +71,36 @@ function AddressSection() {
 
         <div className="address-content">
           <h2 id="address-title">ADDRESS</h2>
-          <h3>TƯ GIA NHÀ TRAI</h3>
-          <p>Ấp Hồng Hạnh - Giồng Riềng</p>
 
-          <div className="map-placeholder" aria-label="Bản đồ địa điểm">
-            <svg viewBox="0 0 48 60" aria-hidden="true">
-              <path d="M24 57S8 40.8 8 24.3C8 14.9 15.2 7 24 7s16 7.9 16 17.3C40 40.8 24 57 24 57Z" />
-              <circle cx="24" cy="24" r="5.5" />
-            </svg>
-            <span>Bản đồ địa điểm</span>
-            <small>Liên kết bản đồ sẽ được cập nhật</small>
+          <p>255 Ấp Hồng Hạnh</p>
+          <p>Giồng Riềng - An Giang</p>
+
+          <div className="map-embed">
+            <iframe
+              src="https://www.google.com/maps?q=9.8956069,105.3014338&z=17&output=embed"
+              title="Bản đồ địa điểm cưới"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
         </div>
 
         <div
           className="address-countdown"
-          aria-label="Đếm ngược đến ngày cưới"
+          role="timer"
+          aria-label="Đếm ngược đến 09 giờ ngày 16 tháng 09 năm 2026"
         >
           {countdownItems.map(({ value, label }) => (
             <div className="countdown-item" key={label}>
-              <strong>{value}</strong>
+              <strong>{formatCountdownValue(value)}</strong>
               <span>{label}</span>
             </div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default AddressSection
+export default AddressSection;

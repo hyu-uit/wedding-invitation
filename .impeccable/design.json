@@ -34,6 +34,66 @@
           "oklch(95% 0.132 24.3)"
         ]
       },
+      "brocade-red": {
+        "role": "primary",
+        "displayName": "Brocade Red",
+        "canonical": "#bd101d",
+        "tonalRamp": [
+          "oklch(15% 0.184 26.3)",
+          "oklch(26% 0.184 26.3)",
+          "oklch(38% 0.184 26.3)",
+          "oklch(50% 0.184 26.3)",
+          "oklch(62% 0.184 26.3)",
+          "oklch(74% 0.184 26.3)",
+          "oklch(86% 0.184 26.3)",
+          "oklch(95% 0.184 26.3)"
+        ]
+      },
+      "brocade-red-deep": {
+        "role": "primary",
+        "displayName": "Deep Brocade Red",
+        "canonical": "#8e111c",
+        "tonalRamp": [
+          "oklch(15% 0.149 24.6)",
+          "oklch(26% 0.149 24.6)",
+          "oklch(38% 0.149 24.6)",
+          "oklch(50% 0.149 24.6)",
+          "oklch(62% 0.149 24.6)",
+          "oklch(74% 0.149 24.6)",
+          "oklch(86% 0.149 24.6)",
+          "oklch(95% 0.149 24.6)"
+        ]
+      },
+      "ceremonial-gold": {
+        "role": "secondary",
+        "displayName": "Ceremonial Gold",
+        "canonical": "#d8a448",
+        "tonalRamp": [
+          "oklch(15% 0.109 79.7)",
+          "oklch(26% 0.109 79.7)",
+          "oklch(38% 0.109 79.7)",
+          "oklch(50% 0.109 79.7)",
+          "oklch(62% 0.109 79.7)",
+          "oklch(74% 0.109 79.7)",
+          "oklch(86% 0.109 79.7)",
+          "oklch(95% 0.109 79.7)"
+        ]
+      },
+      "ceremonial-gold-light": {
+        "role": "secondary",
+        "displayName": "Light Ceremonial Gold",
+        "canonical": "#f1d792",
+        "tonalRamp": [
+          "oklch(15% 0.096 86.3)",
+          "oklch(26% 0.096 86.3)",
+          "oklch(38% 0.096 86.3)",
+          "oklch(50% 0.096 86.3)",
+          "oklch(62% 0.096 86.3)",
+          "oklch(74% 0.096 86.3)",
+          "oklch(86% 0.096 86.3)",
+          "oklch(95% 0.096 86.3)"
+        ]
+      },
       "blush-petal": {
         "role": "secondary",
         "displayName": "Pressed Blush Petal",
@@ -160,6 +220,10 @@
       "label": {
         "displayName": "Bodoni Formal Label",
         "purpose": "Uppercase day, time, and family labels."
+      },
+      "song-hy": {
+        "displayName": "Song Hỷ Ceremonial Mark",
+        "purpose": "Large double-happiness glyph on the red-brocade cover card; keep it reserved for the opening threshold."
       }
     },
     "shadows": [
@@ -172,9 +236,45 @@
         "name": "portrait-copy-veil",
         "value": "0 2px 16px rgba(0, 0, 0, 0.36)",
         "purpose": "Protects the save-the-date lockup over the couple portrait."
+      },
+      {
+        "name": "cover-card-lift",
+        "value": "0 24px 54px rgba(54, 0, 5, 0.34), 0 4px 10px rgba(54, 0, 5, 0.28)",
+        "purpose": "Raises the deep-red square cover card above the brocade fabric before it opens."
+      },
+      {
+        "name": "cover-ribbon-glow",
+        "value": "0 0 28px color-mix(in srgb, var(--color-cover-red-deep) 18%, transparent)",
+        "purpose": "Softly separates the woven ivory center ribbon from the saturated red field."
       }
     ],
-    "motion": [],
+    "motion": [
+      {
+        "name": "cover-panel-split",
+        "value": "power4.inOut 1.25s",
+        "purpose": "Splits the brocade door panels outward with a restrained 3D turn on open."
+      },
+      {
+        "name": "cover-backdrop-fade",
+        "value": "power2.out 0.75s",
+        "purpose": "Fades the deep-red backdrop as the split reveals the portrait-led folio."
+      },
+      {
+        "name": "cover-reduced-motion",
+        "value": "none",
+        "purpose": "Skips panel motion and opens immediately when reduced motion is requested."
+      },
+      {
+        "name": "petal-drift",
+        "value": "power1.out 18-26s",
+        "purpose": "Moves ten low-opacity blush petals diagonally from left to right with varied scale, speed, and rotation."
+      },
+      {
+        "name": "section-reveal",
+        "value": "power3.out 0.9s",
+        "purpose": "Reveals each post-hero section once with varied directional origins (left, right, above, and below); the gallery adds a subtle mask-and-scale reveal as it approaches the viewport."
+      }
+    ],
     "breakpoints": [
       {
         "name": "compact",
@@ -191,6 +291,30 @@
     ]
   },
   "components": [
+    {
+      "name": "Invitation Cover",
+      "kind": "custom",
+      "refersTo": "invitation-cover",
+      "description": "Full-viewport Vietnamese red-brocade split door that identifies the couple and date before opening the folio.",
+      "html": "<div class=\"ds-cover\" role=\"button\" tabindex=\"0\" aria-label=\"Mở thiệp cưới của Huyền Trân và Nhựt Hòa\"><div class=\"ds-cover-panel ds-cover-panel-left\"></div><div class=\"ds-cover-panel ds-cover-panel-right\"></div><div class=\"ds-cover-ribbon\" aria-hidden=\"true\"></div><article class=\"ds-cover-card\"><p class=\"ds-cover-kicker\">Thiệp cưới</p><span class=\"ds-cover-song-hy\">囍</span><p class=\"ds-cover-names\">Huyền Trân · Nhựt Hòa</p><time class=\"ds-cover-date\" datetime=\"2026-09-16\">16 · 09 · 2026</time><p class=\"ds-cover-blessing\">Trân trọng kính mời</p></article><p class=\"ds-cover-open\">Chạm để mở</p></div>",
+      "css": ".ds-cover { position: relative; display: grid; width: 100vw; height: 100svh; place-items: center; overflow: hidden; color: var(--color-cover-gold-light); background: var(--color-cover-red-deep); perspective: 1800px; } .ds-cover-panel { position: absolute; top: 0; bottom: 0; width: 50%; background-color: var(--color-cover-red); background-image: radial-gradient(ellipse at 22% 30%, transparent 0 16px, color-mix(in srgb, var(--color-cover-gold) 34%, transparent) 17px 19px, transparent 20px 100px), radial-gradient(ellipse at 72% 72%, transparent 0 24px, color-mix(in srgb, var(--color-cover-gold) 24%, transparent) 25px 27px, transparent 28px 140px); background-size: 210px 150px; } .ds-cover-panel-left { left: 0; } .ds-cover-panel-right { right: 0; } .ds-cover-ribbon { position: absolute; inset-block: 0; left: 50%; width: clamp(5.5rem, 13vw, 9rem); transform: translateX(-50%); background: linear-gradient(90deg, rgba(110, 8, 18, .12), transparent 15%, rgba(255, 255, 255, .42) 47%, rgba(255, 255, 255, .18) 56%, transparent 86%, rgba(110, 8, 18, .12)), var(--color-paper); box-shadow: 0 0 28px color-mix(in srgb, var(--color-cover-red-deep) 18%, transparent); } .ds-cover-card { position: relative; z-index: 1; display: grid; width: min(72vw, 52svh, 31rem); aspect-ratio: 1.04 / 1; place-items: center; align-content: center; padding: clamp(2.2rem, 7vw, 4.75rem); text-align: center; color: var(--color-cover-gold-light); background: var(--color-cover-red-deep); box-shadow: 0 24px 54px rgba(54, 0, 5, .34), 0 4px 10px rgba(54, 0, 5, .28); } .ds-cover-card::before { position: absolute; inset: clamp(.75rem, 2.5vw, 1.35rem); border: 1px solid color-mix(in srgb, var(--color-cover-gold-light) 62%, transparent); content: ''; } .ds-cover-kicker, .ds-cover-names, .ds-cover-date, .ds-cover-blessing { margin: 0; } .ds-cover-kicker { font-family: var(--font-ceremony); font-size: clamp(.72rem, 2.25vw, 1.05rem); letter-spacing: .28em; text-transform: uppercase; } .ds-cover-song-hy { font-family: var(--font-song-hy); font-size: clamp(5.25rem, 18.5vw, 10.5rem); font-weight: 700; line-height: 1; } .ds-cover-names { margin-top: clamp(.75rem, 2vw, 1.1rem); font-family: var(--font-ceremony); font-size: clamp(1rem, 3.3vw, 1.5rem); white-space: nowrap; } .ds-cover-date { margin-top: clamp(.5rem, 1.8vw, .85rem); font-family: var(--font-display); font-size: clamp(.8rem, 2.4vw, 1.1rem); letter-spacing: .2em; } .ds-cover-blessing { margin-top: clamp(.5rem, 1.8vw, .8rem); font-family: var(--font-body); font-size: clamp(.55rem, 1.75vw, .78rem); letter-spacing: .08em; } .ds-cover-open { position: absolute; z-index: 2; bottom: clamp(1rem, 3svh, 1.8rem); margin: 0; color: var(--color-cover-red-deep); font-family: var(--font-body); font-size: clamp(.72rem, 2vw, .92rem); } .ds-cover:focus-visible .ds-cover-card { outline: 3px solid var(--color-cover-gold-light); outline-offset: 6px; }"
+    },
+    {
+      "name": "Floating Petal Field",
+      "kind": "custom",
+      "refersTo": "invitation-folio",
+      "description": "Ten low-opacity blush petals drifting diagonally from left to right around the invitation content.",
+      "html": "<div class=\"ds-floating-petals\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span><span></span><span></span></div>",
+      "css": ".ds-floating-petals { position: fixed; inset: 0; overflow: hidden; pointer-events: none; } .ds-floating-petals span { position: absolute; top: -10vh; width: 1.15rem; aspect-ratio: 2.35 / 1; border-radius: 84% 22% 76% 31%; background: var(--color-blush-petal); opacity: .62; }"
+    },
+    {
+      "name": "Music Control",
+      "kind": "custom",
+      "refersTo": "invitation-folio",
+      "description": "Fixed mute control for the official Mãi mãi bên nhau playback that begins from the cover-opening gesture.",
+      "html": "<button class=\"ds-music-control\" type=\"button\" aria-label=\"Tắt âm thanh bài Mãi mãi bên nhau\" aria-pressed=\"false\"><svg aria-hidden=\"true\"></svg><span>Mãi mãi bên nhau · Đang phát</span></button>",
+      "css": ".ds-music-control { position: fixed; z-index: 12; top: 1rem; right: max(1rem, calc((100vw - 760px) / 2 + 1rem)); display: flex; min-height: 2.875rem; align-items: center; gap: .65rem; padding: .48rem .82rem; color: var(--color-wine); background: var(--color-paper); border: 1px solid var(--color-wine); border-radius: 999px; } @media (max-width: 560px) { .ds-music-control { right: .75rem; width: 2.875rem; justify-content: center; padding: .65rem; } .ds-music-control span { position: absolute; clip-path: inset(50%); } }"
+    },
     {
       "name": "Invitation Folio",
       "kind": "custom",
@@ -242,33 +366,37 @@
   ],
   "narrative": {
     "northStar": "The Ivory Vow Folio",
-    "overview": "The Ivory Vow Folio treats the invitation as a vertical piece of wedding stationery brought to life by portrait photography. Ivory paper, black ink, oxblood ceremony lettering, formal hairline rules, and the authored ribbon mark create an intimate printed world; the interface refuses generic app chrome so the couple and the invitation remain the only protagonists.\n\nThe system is formal but tender, with generous vertical pacing, a dense two-family composition, and type that shifts deliberately between Bodoni ceremony, Alex Brush intimacy, and Noto Serif fact. It is mobile-first, static, and tactile: paper grain, still blush petals, restrained photographic shade, and one ambient folio shadow supply atmosphere without animation or transitions.",
+    "overview": "The Ivory Vow Folio treats the invitation as a vertical piece of wedding stationery brought to life by portrait photography. Ivory paper, black ink, oxblood ceremony lettering, formal hairline rules, and the authored ribbon mark create an intimate printed world; the interface refuses generic app chrome so the couple and the invitation remain the only protagonists.\n\nThe system is formal but tender, with generous vertical pacing, a dense two-family composition, and type that shifts deliberately between Bodoni formality, Cormorant Garamond ceremony titles, Alex Brush intimacy, and Noto Serif fact. A traditional Vietnamese red-brocade cover forms the threshold: cloud linework, a woven ivory ribbon, ceremonial gold, and a deep-red square Song Hỷ card establish the ritual before the panels part to reveal the folio. After entry, a sparse field of drifting blush petals and restrained one-time section reveals adds air without competing with the content.",
     "keyCharacteristics": [
       "Portrait-led first viewport with upper-left save-the-date copy.",
       "Ivory paper and black ink punctuated by rare oxblood ceremony lettering.",
       "Formal Bodoni display type, intimate Alex Brush names, and readable Noto Serif details.",
       "A true ivory semicircle and authored ribbon mark as the signature silhouettes.",
-      "Static paper grain and blush petals; no animation or transition language."
+      "Red-brocade split-door cover owns the opening motion; drifting petals and one-time section reveals provide a quiet post-entry rhythm."
     ],
     "rules": [
       {"name":"The Ink-and-Wine Rule","body":"Black ink carries information; oxblood carries ceremony. Do not reverse those responsibilities or spread oxblood across ordinary body copy.","section":"colors"},
       {"name":"The Paper Rule","body":"Ivory is the default surface. Pure white appears only as legible copy over photography, never as a generic card background.","section":"colors"},
-      {"name":"The Three Voices Rule","body":"Bodoni speaks ceremony, Alex Brush speaks affection, and Noto Serif speaks fact; never collapse all three roles into one family.","section":"typography"},
+      {"name":"The Brocade Threshold Rule","body":"Saturated brocade red and ceremonial gold belong to the opening cover; once the panels part, return to the established oxblood, ivory, and black-ink folio palette.","section":"colors"},
+      {"name":"The Four Voices Rule","body":"Bodoni speaks formality and time, Cormorant Garamond speaks the principal ceremony title, Alex Brush speaks affection, and Noto Serif speaks fact; never collapse these roles into one family.","section":"typography"},
       {"name":"The Uppercase Restraint Rule","body":"Reserve uppercase for formal English and Vietnamese labels. Names in script and family addresses retain natural casing.","section":"typography"},
       {"name":"The Paired-Families Rule","body":"Bride and groom information remains a balanced two-column pair at every shipped breakpoint; compression changes spacing and type size, not the narrative order.","section":"layout"},
       {"name":"The One-Shadow Rule","body":"Only the complete folio lifts from the desktop canvas; sections, portraits, arches, and decorative marks remain shadowless.","section":"elevation"},
-      {"name":"The Singular Curve Rule","body":"The arch belongs to the hero title and the irregular radius belongs to petals; do not turn either into a generic card radius.","section":"shapes"}
+      {"name":"The Singular Curve Rule","body":"The arch belongs to the hero title and the irregular radius belongs to petals; do not turn either into a generic card radius.","section":"shapes"},
+      {"name":"The Threshold Motion Rule","body":"Keep motion sparse and atmospheric: split both brocade panels outward, let blush petals drift, reveal each section once, and honor reduced motion.","section":"elevation"}
     ],
     "dos": [
       "Do preserve the portrait-led first viewport, upper-left save-the-date lockup, and true bottom semicircle meeting the image-paper boundary as one opening composition.",
       "Do use Bodoni for ceremony, Alex Brush for affection, and Noto Serif for factual Vietnamese copy.",
       "Do keep oxblood rare and intentional against ivory paper and black ink.",
       "Do maintain the permanent two-column family pair while compressing spacing and type at narrow widths.",
-      "Do keep paper grain, petals, ribbon marks, and all typography static."
+      "Do keep paper grain, ribbon marks, and folio typography static while the dedicated petal and section-reveal layers move around them.",
+      "Do let the red-brocade cover establish the ritual first: cloud linework, ivory ribbon, ceremonial gold, and Song Hỷ remain centered at both mobile and desktop sizes."
     ],
     "donts": [
       "Don't introduce generic app bars, dashboards, floating controls, or card grids into the folio world.",
-      "Don't animate or transition petals, ribbons, photographs, type, or sections.",
+      "Don't animate ribbons, photographs, or type, and don't loop factual content; only the cover, drifting petals, and one-time section reveals own motion.",
+      "Don't flatten the cover into an ivory card or substitute generic patterns, icons, or rounded app surfaces for the brocade split-door treatment.",
       "Don't replace the authored Bow Mark with a library icon or emoji.",
       "Don't round portrait corners or reuse the hero arch as a generic container shape.",
       "Don't add internal section shadows; the complete desktop folio owns the only structural shadow."

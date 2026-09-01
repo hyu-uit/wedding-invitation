@@ -6,6 +6,451 @@
   box-shadow: 0 28px 80px rgba(42, 27, 27, 0.2);
 }
 
+body.cover-is-open {
+  overflow: hidden;
+}
+
+.floating-petals {
+  position: fixed;
+  z-index: 8;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floating-petal {
+  position: absolute;
+  top: -10vh;
+  display: block;
+  aspect-ratio: 2.35 / 1;
+  border-radius: 84% 22% 76% 31%;
+  background:
+    radial-gradient(
+      ellipse at 26% 30%,
+      color-mix(in srgb, var(--color-white) 84%, transparent) 0%,
+      color-mix(in srgb, var(--color-blush) 78%, transparent) 58%,
+      color-mix(in srgb, var(--color-wine) 42%, transparent) 100%
+    );
+  box-shadow: 0 0.2rem 0.65rem color-mix(in srgb, var(--color-wine) 22%, transparent);
+  clip-path: polygon(0 44%, 18% 12%, 53% 0, 100% 20%, 84% 67%, 42% 100%, 9% 78%);
+  opacity: 0;
+  transform-origin: 28% 52%;
+  will-change: transform, opacity;
+}
+
+.floating-petal::after {
+  position: absolute;
+  top: 9%;
+  left: 17%;
+  width: 66%;
+  height: 1px;
+  content: '';
+  background: color-mix(in srgb, var(--color-white) 52%, transparent);
+  opacity: 0.65;
+  transform: rotate(-19deg);
+  transform-origin: left center;
+}
+
+.music-player-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.music-control {
+  position: fixed;
+  z-index: 12;
+  top: max(1rem, env(safe-area-inset-top));
+  right: max(1rem, calc((100vw - 760px) / 2 + 1rem));
+  display: flex;
+  min-height: 2.875rem;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.48rem 0.82rem 0.48rem 0.62rem;
+  color: var(--color-wine);
+  background: var(--color-paper);
+  border: 1px solid color-mix(in srgb, var(--color-wine) 58%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+  animation: music-control-enter 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.music-control:hover {
+  color: var(--color-wine-dark);
+  border-color: var(--color-wine);
+}
+
+.music-control:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-wine) 38%, transparent);
+  outline-offset: 3px;
+}
+
+.music-control-icon {
+  width: 1.35rem;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.65;
+}
+
+.music-control-copy {
+  display: grid;
+  gap: 0.05rem;
+  text-align: left;
+}
+
+.music-control-title,
+.music-control-status {
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.music-control-title {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+}
+
+.music-control-status {
+  color: var(--color-ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+}
+
+@keyframes music-control-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cover-screen {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  overflow: hidden;
+  color: var(--color-cover-gold);
+  text-align: center;
+  background: transparent;
+  cursor: pointer;
+  perspective: 1800px;
+}
+
+.cover-screen:focus-visible {
+  outline: none;
+}
+
+.cover-screen:focus-visible .cover-invitation {
+  outline: 3px solid var(--color-cover-gold-light);
+  outline-offset: 6px;
+}
+
+.cover-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--color-cover-red-deep);
+}
+
+.cover-card {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  cursor: pointer;
+}
+
+.cover-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+}
+
+.cover-panel-left {
+  left: 0;
+  transform-origin: left center;
+}
+
+.cover-panel-right {
+  right: 0;
+  transform-origin: right center;
+}
+
+.cover-face {
+  position: absolute;
+  top: 0;
+  width: 200%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-cover-red);
+}
+
+.cover-face-left {
+  left: 0;
+}
+
+.cover-face-right {
+  right: 0;
+}
+
+.cover-scene {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025), transparent 38%),
+    var(--color-cover-red);
+}
+
+.cover-scene::before,
+.cover-scene::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+}
+
+.cover-scene::before {
+  z-index: 1;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(72, 0, 5, 0.018) 0,
+      rgba(72, 0, 5, 0.018) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  mix-blend-mode: soft-light;
+}
+
+.cover-scene::after {
+  z-index: 2;
+  background: radial-gradient(
+    circle at center,
+    transparent 20%,
+    rgba(91, 0, 8, 0.26) 112%
+  );
+}
+
+.cover-brocade-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.62;
+}
+
+.cover-cloud-stroke {
+  fill: none;
+  stroke: var(--color-cover-gold);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4.5;
+  opacity: 0.34;
+}
+
+.cover-silk-ribbon {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: clamp(5.5rem, 13vw, 9rem);
+  transform: translateX(-50%);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(110, 8, 18, 0.12),
+      transparent 15%,
+      rgba(255, 255, 255, 0.42) 47%,
+      rgba(255, 255, 255, 0.18) 56%,
+      transparent 86%,
+      rgba(110, 8, 18, 0.12)
+    ),
+    var(--color-paper);
+  box-shadow: 0 0 28px
+    color-mix(in srgb, var(--color-cover-red-deep) 18%, transparent);
+}
+
+.cover-centerpiece {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(-1.5svh);
+}
+
+.cover-invitation {
+  position: relative;
+  display: flex;
+  width: min(72vw, 52svh, 31rem);
+  aspect-ratio: 1.04 / 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2.2rem, 7vw, 4.75rem);
+  color: var(--color-cover-gold-light);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 45%),
+    var(--color-cover-red-deep);
+  box-shadow:
+    0 24px 54px rgba(54, 0, 5, 0.34),
+    0 4px 10px rgba(54, 0, 5, 0.28);
+}
+
+.cover-invitation::before {
+  position: absolute;
+  inset: clamp(0.75rem, 2.5vw, 1.35rem);
+  border: 1px solid
+    color-mix(in srgb, var(--color-cover-gold-light) 62%, transparent);
+  pointer-events: none;
+  content: '';
+}
+
+.cover-corner {
+  position: absolute;
+  z-index: 1;
+  width: clamp(1.9rem, 6vw, 3.2rem);
+  height: clamp(1.9rem, 6vw, 3.2rem);
+  color: var(--color-cover-gold-light);
+}
+
+.cover-corner::before,
+.cover-corner::after {
+  position: absolute;
+  content: '';
+}
+
+.cover-corner::before {
+  inset: 0;
+  border-top: 3px double currentColor;
+  border-left: 3px double currentColor;
+}
+
+.cover-corner::after {
+  top: 0.45rem;
+  left: 0.45rem;
+  width: 52%;
+  height: 52%;
+  border-top: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+}
+
+.cover-corner-top-left {
+  top: clamp(0.95rem, 3vw, 1.65rem);
+  left: clamp(0.95rem, 3vw, 1.65rem);
+}
+
+.cover-corner-top-right {
+  top: clamp(0.95rem, 3vw, 1.65rem);
+  right: clamp(0.95rem, 3vw, 1.65rem);
+  transform: rotate(90deg);
+}
+
+.cover-corner-bottom-right {
+  right: clamp(0.95rem, 3vw, 1.65rem);
+  bottom: clamp(0.95rem, 3vw, 1.65rem);
+  transform: rotate(180deg);
+}
+
+.cover-corner-bottom-left {
+  bottom: clamp(0.95rem, 3vw, 1.65rem);
+  left: clamp(0.95rem, 3vw, 1.65rem);
+  transform: rotate(270deg);
+}
+
+.cover-kicker {
+  margin: 0 0 clamp(0.15rem, 1vw, 0.5rem);
+  font-family: var(--font-ceremony);
+  font-size: clamp(0.72rem, 2.25vw, 1.05rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+}
+
+.cover-happiness-mark {
+  display: block;
+  margin: 0 0 clamp(0.15rem, 0.8vw, 0.45rem);
+  color: var(--color-cover-gold-light);
+  font-family: var(--font-song-hy);
+  font-size: clamp(5.25rem, 18.5vw, 10.5rem);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 0
+    color-mix(in srgb, var(--color-cover-gold-light) 55%, transparent);
+}
+
+.cover-names {
+  margin: clamp(0.75rem, 2vw, 1.1rem) 0 0;
+  font-family: var(--font-ceremony);
+  font-size: clamp(1rem, 3.3vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.cover-date {
+  margin: clamp(0.5rem, 1.8vw, 0.85rem) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 2.4vw, 1.1rem);
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+}
+
+.cover-blessing {
+  margin: clamp(0.5rem, 1.8vw, 0.8rem) 0 0;
+  font-family: var(--font-body);
+  font-size: clamp(0.55rem, 1.75vw, 0.78rem);
+  letter-spacing: 0.08em;
+}
+
+.cover-open-callout {
+  display: flex;
+  margin-top: clamp(1rem, 3svh, 1.8rem);
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-cover-red-deep);
+  font-family: var(--font-body);
+  font-size: clamp(0.72rem, 2vw, 0.92rem);
+  letter-spacing: 0.04em;
+}
+
+.cover-open-bow {
+  width: clamp(2.3rem, 7vw, 3.25rem);
+  fill: var(--color-paper);
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
 .hero-section {
   position: relative;
   z-index: 1;
@@ -104,10 +549,10 @@
 .wedding-word {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 9vw, 5.4rem);
+  font-size: var(--type-wedding-display);
   font-weight: 400;
   line-height: 0.95;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -115,14 +560,14 @@
   position: absolute;
   top: calc(100% + clamp(1.25rem, 4vw, 2.5rem));
   left: 50%;
-  width: min(92vw, 700px);
+  width: min(100vw, 720px);
   margin: 0;
   font-family: var(--font-script);
-  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-size: var(--type-couple-name);
   font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
+  line-height: 1.08;
+  letter-spacing: normal;
+  white-space: nowrap;
   transform: translateX(-50%);
 }
 
@@ -132,7 +577,7 @@
   isolation: isolate;
   min-height: 100vh;
   padding: clamp(6.25rem, 25vw, 12rem) clamp(1.25rem, 5vw, 3rem)
-    var(--space-9);
+    clamp(2.5rem, 6vw, 3.5rem);
   overflow: hidden;
   background-color: var(--color-paper);
   background-image: url('./assets/paper-grain.svg');
@@ -147,43 +592,59 @@
 }
 
 .invitation-heading h2 {
-  max-width: 18ch;
+  max-width: 16ch;
   margin: 0 auto;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3.4rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: var(--type-invitation-title);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: 0.005em;
   text-transform: uppercase;
   text-wrap: balance;
 }
 
 .heading-rule {
-  width: min(78%, 470px);
+  width: clamp(4.5rem, 16vw, 7.5rem);
   height: 1px;
-  margin: var(--space-2) auto var(--space-6);
+  margin: clamp(1rem, 2.5vw, 1.25rem) auto
+    clamp(1.75rem, 4.5vw, 2.25rem);
   background: var(--color-ink);
+  opacity: 0.72;
 }
 
 .invitation-heading p {
-  margin: 0 0 var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.7rem, 2vw, 1rem);
+  margin: 0 0 clamp(1.5rem, 4vw, 2rem);
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 4vw, 2rem);
+  font-size: var(--type-event-meta);
   font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.035em;
   text-transform: uppercase;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.event-separator {
+  width: 0.22rem;
+  height: 0.22rem;
+  background: var(--color-wine);
+  border-radius: 50%;
 }
 
 .invitation-heading time {
   display: block;
   width: fit-content;
   margin: 0 auto;
-  padding: 0 var(--space-3) var(--space-2);
-  border-bottom: 1px solid var(--color-ink);
+  padding: 0 0.35rem 0.55rem;
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 6vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  font-size: var(--type-event-date);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .families {
@@ -192,7 +653,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 6vw, 3.25rem);
-  margin-top: var(--space-8);
+  margin-top: clamp(3.25rem, 8vw, 4.5rem);
 }
 
 .family {
@@ -202,29 +663,48 @@
 
 .family-copy {
   display: flex;
-  min-height: 190px;
   flex-direction: column;
   align-items: center;
 }
 
 .family-copy h3 {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
   margin: 0 0 var(--space-5);
   font-family: var(--font-display);
-  font-size: clamp(1.45rem, 4vw, 2rem);
-  font-weight: 500;
+  font-size: var(--type-family-label);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.family-copy h3::before,
+.family-copy h3::after {
+  height: 1px;
+  flex: 1;
+  background: var(--color-wine);
+  content: '';
+  opacity: 0.46;
 }
 
 .family-copy p,
 .family-copy address {
   margin: 0;
-  font-size: clamp(0.83rem, 2.45vw, 1.18rem);
+  font-size: var(--type-family-detail);
   font-style: normal;
-  line-height: 1.55;
+  line-height: 1.62;
   text-wrap: balance;
 }
 
+.family-parents {
+  min-height: clamp(3.1rem, 6.5vw, 3.25rem);
+}
+
 .family-copy p {
+  letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 
@@ -234,6 +714,7 @@
 
 .family img {
   width: 100%;
+  margin-top: clamp(1.5rem, 4vw, 2rem);
   aspect-ratio: 0.67;
   object-fit: cover;
   object-position: center;
@@ -248,9 +729,9 @@
 .person-title p {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3.7rem);
-  line-height: 0.9;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.7rem, 4.8vw, 3rem);
+  line-height: 0.95;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -258,10 +739,10 @@
   margin: var(--space-2) 0 0;
   color: var(--color-ink);
   font-family: var(--font-script);
-  font-size: clamp(2rem, 6vw, 3.55rem);
+  font-size: clamp(2rem, 5.2vw, 3.15rem);
   font-weight: 400;
-  line-height: 1;
-  white-space: nowrap;
+  line-height: 1.08;
+  text-wrap: balance;
 }
 
 .families-bow {
@@ -336,7 +817,7 @@
 .ceremony-section {
   position: relative;
   isolation: isolate;
-  padding: clamp(3.5rem, 9vw, 5.5rem) clamp(1rem, 5vw, 2.5rem)
+  padding: clamp(2.5rem, 6vw, 3.5rem) clamp(1rem, 5vw, 2.5rem)
     clamp(4rem, 10vw, 6.25rem);
   overflow: hidden;
   color: var(--color-ink);
@@ -381,11 +862,11 @@
 .ceremony-section h2 {
   margin: clamp(0.9rem, 2.5vw, 1.25rem) 0 0;
   color: var(--color-wine);
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-family: var(--font-ceremony);
+  font-size: clamp(2.2rem, 6.4vw, 3.65rem);
   font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 1.06;
+  letter-spacing: 0.015em;
 }
 
 .ceremony-date {
@@ -410,13 +891,13 @@
 }
 
 .ceremony-date-month {
-  justify-items: start;
-  text-align: left;
+  justify-items: center;
+  text-align: center;
 }
 
 .ceremony-date-year {
-  justify-items: end;
-  text-align: right;
+  justify-items: center;
+  text-align: center;
 }
 
 .ceremony-rule {
@@ -454,9 +935,16 @@
 }
 
 .ceremony-lunar {
+  display: grid;
+  gap: var(--space-1);
   margin: clamp(1.75rem, 5vw, 2.75rem) 0 0;
-  font-size: clamp(0.85rem, 2.2vw, 1.2rem);
-  line-height: 1.5;
+  font-size: clamp(1rem, 2.6vw, 1.35rem);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.ceremony-lunar p {
+  margin: 0;
 }
 
 .welcome-section {
@@ -514,17 +1002,22 @@
 }
 
 .welcome-portrait img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 110%;
+  max-width: none;
+  height: 110%;
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
+  transform: translate(-50%, -5%);
 }
 
 .welcome-calendar {
   position: absolute;
-  bottom: -4%;
+  bottom: 0;
   left: 50%;
-  width: 84%;
+  width: 70%;
   aspect-ratio: 1;
   overflow: hidden;
   background: rgba(232, 237, 220, 0.6);
@@ -555,12 +1048,12 @@
 
 .calendar-day-marked svg {
   position: absolute;
-  width: clamp(2rem, 5vw, 3rem);
+  width: clamp(2.35rem, 5.6vw, 3.4rem);
   height: auto;
   overflow: visible;
-  fill: none;
-  stroke: var(--color-blush);
-  stroke-width: 2.25;
+  fill: var(--color-paper);
+  stroke: var(--color-wine);
+  stroke-width: 2.75;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -568,7 +1061,10 @@
 .calendar-day-marked > span {
   position: relative;
   z-index: 1;
-  color: var(--color-blush);
+  color: var(--color-wine-dark);
+  font-family: var(--font-display);
+  font-size: 1.12em;
+  font-weight: 500;
 }
 
 .welcome-verse {
@@ -673,42 +1169,44 @@
   text-wrap: balance;
 }
 
-.map-placeholder {
-  display: flex;
+.map-embed {
   width: min(100%, 265px);
-  min-height: clamp(9rem, 22vw, 12rem);
-  flex-direction: column;
+  margin-top: clamp(1.75rem, 5vw, 3rem);
+  background-color: var(--color-paper-deep);
+  overflow: hidden;
+}
+
+.map-embed iframe {
+  display: block;
+  width: 100%;
+  height: clamp(8.5rem, 22vw, 11rem);
+  border: 0;
+}
+
+.map-embed a {
+  display: flex;
+  min-height: 2.75rem;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  margin-top: clamp(1.75rem, 5vw, 3rem);
-  padding: 1rem;
+  padding: 0.55rem 0.75rem;
   color: var(--color-wine-dark);
-  text-align: center;
-  background-color: var(--color-paper-deep);
-  border: 1px solid var(--color-wine);
-}
-
-.map-placeholder svg {
-  width: clamp(1.75rem, 5vw, 2.5rem);
-  fill: none;
-  stroke: var(--color-wine);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
-}
-
-.map-placeholder span {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-size: clamp(0.8rem, 2.2vw, 1rem);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
+  border-top: 1px solid var(--color-wine);
 }
 
-.map-placeholder small {
-  max-width: 18ch;
-  color: var(--color-ink-soft);
-  font-size: clamp(0.68rem, 1.8vw, 0.85rem);
-  line-height: 1.35;
+.map-embed a:hover {
+  color: var(--color-white);
+  background-color: var(--color-wine-dark);
+}
+
+.map-embed a:focus-visible {
+  outline: 3px solid var(--color-wine-dark);
+  outline-offset: -4px;
 }
 
 .address-countdown {
@@ -996,8 +1494,31 @@
     clamp(3.5rem, 9vw, 5.5rem);
 }
 
-.closing-footer p {
+.closing-quote {
+  max-width: 38rem;
+  margin: 0 auto;
+  color: var(--color-wine);
+  font-family: var(--font-script);
+  font-size: clamp(2.15rem, 6.5vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+.closing-quote p {
   margin: 0;
+}
+
+.closing-heart {
+  display: inline-block;
+  margin-left: 0.08em;
+  font-size: 0.48em;
+  vertical-align: 0.16em;
+  white-space: nowrap;
+}
+
+.closing-invitation {
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
   font-family: var(--font-script);
   font-size: clamp(2.25rem, 7vw, 4rem);
   font-weight: 400;
@@ -1009,17 +1530,29 @@
     box-shadow: none;
   }
 
+  .music-control {
+    right: max(0.75rem, env(safe-area-inset-right));
+    min-width: 2.875rem;
+    justify-content: center;
+    padding: 0.65rem;
+  }
+
+  .music-control-copy {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   .hero-section {
     min-height: 620px;
   }
 
   .details-section {
     padding-inline: var(--space-4);
-    padding-bottom: var(--space-8);
-  }
-
-  .heading-rule {
-    margin-bottom: var(--space-5);
   }
 
   .families {
@@ -1028,16 +1561,15 @@
   }
 
   .family-copy {
-    min-height: 220px;
+    min-height: 0;
+  }
+
+  .family-parents {
+    min-height: 4.25rem;
   }
 
   .family-copy h3 {
     margin-bottom: var(--space-4);
-  }
-
-  .family-copy p,
-  .family-copy address {
-    font-size: 0.875rem;
   }
 
   .person-title {
@@ -1106,10 +1638,12 @@
     font-size: clamp(0.7rem, 2.1vw, 0.95rem);
   }
 
-  .map-placeholder {
-    min-height: 8.5rem;
+  .map-embed {
     margin-top: var(--space-5);
-    padding-inline: 0.5rem;
+  }
+
+  .map-embed iframe {
+    height: 8.5rem;
   }
 
   .address-countdown {
@@ -1153,18 +1687,19 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .music-control {
+    animation: none;
+  }
+}
+
 @media (max-width: 360px) {
   .hero-section {
     min-height: 580px;
   }
 
   .family-copy {
-    min-height: 230px;
-  }
-
-  .family-copy p,
-  .family-copy address {
-    font-size: 0.8125rem;
+    min-height: 0;
   }
 }
 

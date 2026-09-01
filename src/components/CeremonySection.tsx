@@ -1,8 +1,81 @@
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+
 import ceremonyCouple from '../assets/photos/ceremony-couple.jpg'
 
+gsap.registerPlugin(useGSAP)
+
 function CeremonySection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const dayRef = useRef<HTMLTimeElement>(null)
+
+  useGSAP(
+    () => {
+      const section = sectionRef.current
+      const day = dayRef.current
+
+      if (!section || !day) return
+
+      const media = gsap.matchMedia()
+
+      media.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(day, { clearProps: 'transform,willChange' })
+      })
+
+      media.add('(prefers-reduced-motion: no-preference)', () => {
+        let isVisible = false
+        const hop = gsap.to(day, {
+          y: -12,
+          duration: 0.48,
+          ease: 'sine.inOut',
+          repeat: -1,
+          repeatDelay: 0.08,
+          yoyo: true,
+          paused: true,
+        })
+
+        const syncMotion = () => {
+          if (isVisible && !document.hidden) {
+            gsap.set(day, { willChange: 'transform' })
+            hop.play()
+            return
+          }
+
+          hop.pause()
+          gsap.set(day, { willChange: 'auto' })
+        }
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            isVisible = entry.isIntersecting
+            syncMotion()
+          },
+          { threshold: 0.25 },
+        )
+
+        observer.observe(section)
+        document.addEventListener('visibilitychange', syncMotion)
+
+        return () => {
+          observer.disconnect()
+          document.removeEventListener('visibilitychange', syncMotion)
+          hop.kill()
+          gsap.set(day, { clearProps: 'transform,willChange' })
+        }
+      })
+
+      return () => media.revert()
+    },
+    { scope: sectionRef },
+  )
+
   return (
-    <section className="ceremony-section" aria-labelledby="ceremony-title">
+    <section
+      ref={sectionRef}
+      className="ceremony-section"
+      aria-labelledby="ceremony-title"
+    >
       <div className="petals ceremony-petals" aria-hidden="true">
         <span />
         <span />
@@ -35,7 +108,11 @@ function CeremonySection() {
 
         <div className="ceremony-date-center">
           <span>THỨ TƯ</span>
-          <time className="ceremony-day" dateTime="2026-09-16">
+          <time
+            ref={dayRef}
+            className="ceremony-day"
+            dateTime="2026-09-16"
+          >
             16
           </time>
           <time className="ceremony-time" dateTime="2026-09-16T09:00:00+07:00">
@@ -50,7 +127,10 @@ function CeremonySection() {
         </div>
       </div>
 
-      <p className="ceremony-lunar">Nhằm ngày 06 tháng 08 năm Bính Ngọ</p>
+      <div className="ceremony-lunar">
+        <p>Nhằm ngày 06 tháng 08 năm Bính Ngọ</p>
+        <p>Nhóm họ 05 tháng 08 năm Bính Ngọ</p>
+      </div>
     </section>
   )
 }

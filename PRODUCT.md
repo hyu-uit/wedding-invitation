@@ -37,7 +37,7 @@ The working product identity is “Bridge and Bloom.” The invitation is for Hu
 
 ## Evidence on Hand
 
-Wedding photography is supplied in `src/assets/photos/`: `couple-hero.jpg`, `bride.jpg`, and `groom.jpg`. The current references confirm the couple's names, wedding date and time, both family names, and family addresses in An Giang. RSVP destination, map link, music, deployment details, and gift/wish details are not available yet and must not be invented.
+Wedding photography is supplied in `src/assets/photos/`: `couple-hero.jpg`, `bride.jpg`, and `groom.jpg`. The current references confirm the couple's names, wedding date and time, both family names, and family addresses in An Giang. The approved music is “Mãi mãi bên nhau” by Noo Phước Thịnh, played from the official YouTube source after the guest opens the cover. RSVP destination, deployment details, and gift/wish details are not available yet and must not be invented.
 
 ## Product Principles
 

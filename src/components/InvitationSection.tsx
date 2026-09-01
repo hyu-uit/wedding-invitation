@@ -1,6 +1,6 @@
-import bridePortrait from '../assets/photos/bride.jpg'
-import groomPortrait from '../assets/photos/groom.jpg'
-import BowMark from './BowMark'
+import bridePortrait from "../assets/photos/bride.jpg";
+import groomPortrait from "../assets/photos/groom.jpg";
+import BowMark from "./BowMark";
 
 function InvitationSection() {
   return (
@@ -16,7 +16,11 @@ function InvitationSection() {
       <header className="invitation-heading">
         <h2 id="invitation-title">Thư mời tiệc cưới</h2>
         <div className="heading-rule" aria-hidden="true" />
-        <p>Thứ Tư · 09:00</p>
+        <p>
+          <span>Thứ Tư</span>
+          <span className="event-separator" aria-hidden="true" />
+          <span>09:00</span>
+        </p>
         <time dateTime="2026-09-16T09:00:00+07:00">16.09.2026</time>
       </header>
 
@@ -24,8 +28,10 @@ function InvitationSection() {
         <article className="family">
           <div className="family-copy">
             <h3>Nhà gái</h3>
-            <p>Ông Dương Văn Mẫn</p>
-            <p>Bà Lê Thị Huệ</p>
+            <div className="family-parents">
+              <p>Ông Dương Văn Mẫn</p>
+              <p>Bà Lê Thị Huệ</p>
+            </div>
             <address>
               Ấp Hồng Hạnh, Xã Giồng Riềng
               <br />
@@ -46,9 +52,11 @@ function InvitationSection() {
         <article className="family">
           <div className="family-copy">
             <h3>Nhà trai</h3>
-            <p>Bà Dương Thị Yến Xuân</p>
+            <div className="family-parents">
+              <p>Bà Dương Thị Yến Xuân</p>
+            </div>
             <address>
-              Ấp Dương Gỗ Vàm, Xã Long Thạnh
+              Ấp Đường Gỗ Vàm, Xã Long Thạnh
               <br />
               Tỉnh An Giang
             </address>
@@ -67,7 +75,7 @@ function InvitationSection() {
         <BowMark className="families-bow" />
       </div>
     </section>
-  )
+  );
 }
 
-export default InvitationSection
+export default InvitationSection;
