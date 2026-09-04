@@ -105,11 +105,6 @@ body.cover-is-open {
   stroke-width: 1.65;
 }
 
-.music-control-play {
-  fill: currentColor;
-  stroke: none;
-}
-
 .music-control-copy {
   display: grid;
   gap: 0.05rem;

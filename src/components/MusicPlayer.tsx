@@ -9,11 +9,12 @@ import {
 const videoId = 'bs7u95QlCxs'
 const youtubeOrigin = 'https://www.youtube-nocookie.com'
 
-type PlaybackState = 'idle' | 'loading' | 'playing' | 'paused' | 'error'
+type PlaybackState = 'loading' | 'playing' | 'paused' | 'error'
 
 type YouTubePlayer = {
   destroy: () => void
   getIframe: () => HTMLIFrameElement
+  getPlayerState: () => number
   mute: () => void
   playVideo: () => void
   setVolume: (volume: number) => void
@@ -37,6 +38,7 @@ type YouTubePlayerOptions = {
   events: {
     onReady: (event: YouTubePlayerEvent) => void
     onStateChange: (event: YouTubePlayerStateEvent) => void
+    onAutoplayBlocked: () => void
     onError: () => void
   }
 }
@@ -96,6 +98,25 @@ function loadYouTubeApi() {
   return youtubeApiPromise
 }
 
+function SoundIcon({ muted }: { muted: boolean }) {
+  return (
+    <svg className="music-control-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4.5 9.25h3.25l4.1-3.35v12.2l-4.1-3.35H4.5z" />
+      {muted ? (
+        <>
+          <path d="m15.7 9 4.3 4.3" />
+          <path d="m20 9-4.3 4.3" />
+        </>
+      ) : (
+        <>
+          <path d="M15.5 9.15a4.1 4.1 0 0 1 0 5.7" />
+          <path d="M18.1 6.9a7.3 7.3 0 0 1 0 10.2" />
+        </>
+      )}
+    </svg>
+  )
+}
+
 export type MusicPlayerHandle = {
   play: () => void
 }
@@ -104,61 +125,30 @@ type MusicPlayerProps = {
   visible: boolean
 }
 
-function SoundIcon({
-  muted,
-  playing,
-}: {
-  muted: boolean
-  playing: boolean
-}) {
-  return (
-    <svg className="music-control-icon" viewBox="0 0 24 24" aria-hidden="true">
-      {!playing ? (
-        <path className="music-control-play" d="m8.5 6.2 9 5.8-9 5.8z" />
-      ) : (
-        <>
-          <path d="M4.5 9.25h3.25l4.1-3.35v12.2l-4.1-3.35H4.5z" />
-          {muted ? (
-            <>
-              <path d="m15.7 9 4.3 4.3" />
-              <path d="m20 9-4.3 4.3" />
-            </>
-          ) : (
-            <>
-              <path d="M15.5 9.15a4.1 4.1 0 0 1 0 5.7" />
-              <path d="M18.1 6.9a7.3 7.3 0 0 1 0 10.2" />
-            </>
-          )}
-        </>
-      )}
-    </svg>
-  )
-}
-
 const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
   function MusicPlayer({ visible }, ref) {
     const playerHostRef = useRef<HTMLDivElement>(null)
     const playerRef = useRef<YouTubePlayer>(null)
     const playerReadyRef = useRef(false)
     const playRequestedRef = useRef(false)
-    const [isMuted, setIsMuted] = useState(false)
+    const [isMuted, setIsMuted] = useState(true)
     const [playbackState, setPlaybackState] =
-      useState<PlaybackState>('idle')
+      useState<PlaybackState>('loading')
 
-    const startPlayer = (player = playerRef.current) => {
+    const playAudibly = (player = playerRef.current) => {
       if (!player) return
 
       player.setVolume(48)
       player.unMute()
       player.playVideo()
+      setIsMuted(false)
+      setPlaybackState(player.getPlayerState() === 1 ? 'playing' : 'loading')
     }
 
     const startMusic = () => {
       playRequestedRef.current = true
-      setIsMuted(false)
-      setPlaybackState('loading')
 
-      if (playerReadyRef.current) startPlayer()
+      if (playerReadyRef.current) playAudibly()
     }
 
     useImperativeHandle(ref, () => ({ play: startMusic }))
@@ -176,7 +166,7 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
             videoId,
             host: youtubeOrigin,
             playerVars: {
-              autoplay: 0,
+              autoplay: 1,
               controls: 0,
               disablekb: 1,
               loop: 1,
@@ -196,7 +186,15 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
                 iframe.setAttribute('aria-hidden', 'true')
                 iframe.referrerPolicy = 'strict-origin-when-cross-origin'
 
-                if (playRequestedRef.current) startPlayer(event.target)
+                event.target.setVolume(48)
+
+                if (playRequestedRef.current) {
+                  playAudibly(event.target)
+                } else {
+                  event.target.mute()
+                  event.target.playVideo()
+                  setIsMuted(true)
+                }
               },
               onStateChange: (event) => {
                 if (event.data === youtube.PlayerState.PLAYING) {
@@ -205,14 +203,14 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
                 }
 
                 if (
-                  playRequestedRef.current &&
-                  (event.data === youtube.PlayerState.PAUSED ||
-                    event.data === youtube.PlayerState.ENDED ||
-                    event.data === youtube.PlayerState.CUED)
+                  event.data === youtube.PlayerState.PAUSED ||
+                  event.data === youtube.PlayerState.ENDED ||
+                  event.data === youtube.PlayerState.CUED
                 ) {
                   setPlaybackState('paused')
                 }
               },
+              onAutoplayBlocked: () => setPlaybackState('paused'),
               onError: () => setPlaybackState('error'),
             },
           })
@@ -232,25 +230,21 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
     }, [])
 
     const handleControlClick = () => {
-      if (playbackState !== 'playing') {
-        startMusic()
+      if (playbackState !== 'playing' || isMuted) {
+        playAudibly()
         return
       }
 
-      const nextMuted = !isMuted
-
-      setIsMuted(nextMuted)
-      playerRef.current?.[nextMuted ? 'mute' : 'unMute']()
+      playerRef.current?.mute()
+      setIsMuted(true)
     }
 
-    const isPlaying = playbackState === 'playing'
-    const controlLabel = !isPlaying
-      ? playbackState === 'error'
+    const controlLabel =
+      playbackState === 'error'
         ? 'Thử phát lại bài Mãi mãi bên nhau'
-        : 'Phát bài Mãi mãi bên nhau'
-      : isMuted
-        ? 'Bật âm thanh bài Mãi mãi bên nhau'
-        : 'Tắt âm thanh bài Mãi mãi bên nhau'
+        : isMuted
+          ? 'Bật âm thanh bài Mãi mãi bên nhau'
+          : 'Tắt âm thanh bài Mãi mãi bên nhau'
 
     return (
       <>
@@ -262,11 +256,11 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
             className="music-control"
             type="button"
             aria-label={controlLabel}
-            aria-pressed={isPlaying && isMuted}
+            aria-pressed={isMuted}
             data-playback-state={playbackState}
             onClick={handleControlClick}
           >
-            <SoundIcon muted={isMuted} playing={isPlaying} />
+            <SoundIcon muted={isMuted} />
           </button>
         )}
       </>
