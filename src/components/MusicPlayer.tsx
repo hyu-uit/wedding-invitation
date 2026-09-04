@@ -1,101 +1,20 @@
 import {
   forwardRef,
-  useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react'
 
-const videoId = 'bs7u95QlCxs'
-const youtubeOrigin = 'https://www.youtube-nocookie.com'
+const musicSource = '/audio/mai-mai-ben-nhau.mp3'
 
-type PlaybackState = 'loading' | 'playing' | 'paused' | 'error'
+type PlaybackState = 'idle' | 'loading' | 'playing' | 'paused' | 'error'
 
-type YouTubePlayer = {
-  destroy: () => void
-  getIframe: () => HTMLIFrameElement
-  getPlayerState: () => number
-  mute: () => void
-  playVideo: () => void
-  setVolume: (volume: number) => void
-  unMute: () => void
+export type MusicPlayerHandle = {
+  play: () => void
 }
 
-type YouTubePlayerEvent = {
-  target: YouTubePlayer
-}
-
-type YouTubePlayerStateEvent = YouTubePlayerEvent & {
-  data: number
-}
-
-type YouTubePlayerOptions = {
-  height: string
-  width: string
-  videoId: string
-  host: string
-  playerVars: Record<string, number | string>
-  events: {
-    onReady: (event: YouTubePlayerEvent) => void
-    onStateChange: (event: YouTubePlayerStateEvent) => void
-    onAutoplayBlocked: () => void
-    onError: () => void
-  }
-}
-
-type YouTubeApi = {
-  Player: new (
-    element: HTMLElement,
-    options: YouTubePlayerOptions,
-  ) => YouTubePlayer
-  PlayerState: {
-    ENDED: number
-    PLAYING: number
-    PAUSED: number
-    CUED: number
-  }
-}
-
-declare global {
-  interface Window {
-    YT?: YouTubeApi
-    onYouTubeIframeAPIReady?: () => void
-  }
-}
-
-let youtubeApiPromise: Promise<YouTubeApi> | null = null
-
-function loadYouTubeApi() {
-  if (window.YT?.Player) return Promise.resolve(window.YT)
-  if (youtubeApiPromise) return youtubeApiPromise
-
-  youtubeApiPromise = new Promise<YouTubeApi>((resolve, reject) => {
-    const previousReadyCallback = window.onYouTubeIframeAPIReady
-
-    window.onYouTubeIframeAPIReady = () => {
-      previousReadyCallback?.()
-
-      if (window.YT?.Player) {
-        resolve(window.YT)
-      } else {
-        reject(new Error('YouTube Player API không khởi tạo được'))
-      }
-    }
-
-    if (document.querySelector('script[data-youtube-player-api]')) return
-
-    const script = document.createElement('script')
-    script.src = 'https://www.youtube.com/iframe_api'
-    script.async = true
-    script.dataset.youtubePlayerApi = 'true'
-    script.addEventListener('error', () => {
-      youtubeApiPromise = null
-      reject(new Error('Không tải được YouTube Player API'))
-    })
-    document.head.append(script)
-  })
-
-  return youtubeApiPromise
+type MusicPlayerProps = {
+  visible: boolean
 }
 
 function SoundIcon({ muted }: { muted: boolean }) {
@@ -117,126 +36,39 @@ function SoundIcon({ muted }: { muted: boolean }) {
   )
 }
 
-export type MusicPlayerHandle = {
-  play: () => void
-}
-
-type MusicPlayerProps = {
-  visible: boolean
-}
-
 const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
   function MusicPlayer({ visible }, ref) {
-    const playerHostRef = useRef<HTMLDivElement>(null)
-    const playerRef = useRef<YouTubePlayer>(null)
-    const playerReadyRef = useRef(false)
-    const playRequestedRef = useRef(false)
-    const [isMuted, setIsMuted] = useState(true)
+    const audioRef = useRef<HTMLAudioElement>(null)
+    const [isMuted, setIsMuted] = useState(false)
     const [playbackState, setPlaybackState] =
-      useState<PlaybackState>('loading')
+      useState<PlaybackState>('idle')
 
-    const playAudibly = (player = playerRef.current) => {
-      if (!player) return
+    const playMusic = () => {
+      const audio = audioRef.current
+      if (!audio) return
 
-      player.setVolume(48)
-      player.unMute()
-      player.playVideo()
+      audio.volume = 0.48
+      audio.muted = false
       setIsMuted(false)
-      setPlaybackState(player.getPlayerState() === 1 ? 'playing' : 'loading')
+      setPlaybackState('loading')
+
+      void audio.play().catch(() => setPlaybackState('error'))
     }
 
-    const startMusic = () => {
-      playRequestedRef.current = true
-
-      if (playerReadyRef.current) playAudibly()
-    }
-
-    useImperativeHandle(ref, () => ({ play: startMusic }))
-
-    useEffect(() => {
-      let cancelled = false
-
-      loadYouTubeApi()
-        .then((youtube) => {
-          if (cancelled || !playerHostRef.current) return
-
-          const player = new youtube.Player(playerHostRef.current, {
-            width: '200',
-            height: '200',
-            videoId,
-            host: youtubeOrigin,
-            playerVars: {
-              autoplay: 1,
-              controls: 0,
-              disablekb: 1,
-              loop: 1,
-              origin: window.location.origin,
-              playlist: videoId,
-              playsinline: 1,
-              rel: 0,
-            },
-            events: {
-              onReady: (event) => {
-                playerRef.current = event.target
-                playerReadyRef.current = true
-
-                const iframe = event.target.getIframe()
-                iframe.title = 'Mãi mãi bên nhau - Noo Phước Thịnh'
-                iframe.tabIndex = -1
-                iframe.setAttribute('aria-hidden', 'true')
-                iframe.referrerPolicy = 'strict-origin-when-cross-origin'
-
-                event.target.setVolume(48)
-
-                if (playRequestedRef.current) {
-                  playAudibly(event.target)
-                } else {
-                  event.target.mute()
-                  event.target.playVideo()
-                  setIsMuted(true)
-                }
-              },
-              onStateChange: (event) => {
-                if (event.data === youtube.PlayerState.PLAYING) {
-                  setPlaybackState('playing')
-                  return
-                }
-
-                if (
-                  event.data === youtube.PlayerState.PAUSED ||
-                  event.data === youtube.PlayerState.ENDED ||
-                  event.data === youtube.PlayerState.CUED
-                ) {
-                  setPlaybackState('paused')
-                }
-              },
-              onAutoplayBlocked: () => setPlaybackState('paused'),
-              onError: () => setPlaybackState('error'),
-            },
-          })
-
-          playerRef.current = player
-        })
-        .catch(() => {
-          if (!cancelled) setPlaybackState('error')
-        })
-
-      return () => {
-        cancelled = true
-        playerReadyRef.current = false
-        playerRef.current?.destroy()
-        playerRef.current = null
-      }
-    }, [])
+    useImperativeHandle(ref, () => ({ play: playMusic }))
 
     const handleControlClick = () => {
-      if (playbackState !== 'playing' || isMuted) {
-        playAudibly()
+      const audio = audioRef.current
+      if (!audio) return
+
+      if (audio.paused || playbackState === 'error') {
+        playMusic()
         return
       }
 
-      playerRef.current?.mute()
-      setIsMuted(true)
+      const nextMuted = !audio.muted
+      audio.muted = nextMuted
+      setIsMuted(nextMuted)
     }
 
     const controlLabel =
@@ -248,9 +80,17 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
 
     return (
       <>
-        <div className="music-player-frame" aria-hidden="true">
-          <div ref={playerHostRef} />
-        </div>
+        <audio
+          ref={audioRef}
+          src={musicSource}
+          preload="auto"
+          loop
+          onPlay={() => setPlaybackState('playing')}
+          onPlaying={() => setPlaybackState('playing')}
+          onPause={() => setPlaybackState('paused')}
+          onWaiting={() => setPlaybackState('loading')}
+          onError={() => setPlaybackState('error')}
+        />
         {visible && (
           <button
             className="music-control"

@@ -245,7 +245,7 @@ The cover is the first physical-feeling threshold into the folio.
 
 ### Music Control
 
-- **Playback:** “Mãi mãi bên nhau” by Noo Phước Thịnh begins from its official YouTube source on the guest's cover-opening gesture, loops quietly at a restrained starting volume, and never delays the invitation.
+- **Playback:** The supplied local MP3 of “Mãi mãi bên nhau” by Noo Phước Thịnh begins as background audio on the guest's cover-opening gesture, loops quietly at a restrained starting volume, and never opens a visible media player.
 - **Control:** A fixed ivory-and-oxblood sound control appears at the upper-right after the cover opens. Desktop shows the song name and playback state; compact screens retain a 46px icon control with the same accessible label.
 - **Behavior:** The button toggles mute without restarting the track, exposes its state through `aria-pressed`, and remains keyboard accessible with a visible focus ring.
 
