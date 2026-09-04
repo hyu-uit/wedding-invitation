@@ -1,112 +1,277 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react'
 
-const videoId = "bs7u95QlCxs";
-const youtubeOrigin = "https://www.youtube-nocookie.com";
+const videoId = 'bs7u95QlCxs'
+const youtubeOrigin = 'https://www.youtube-nocookie.com'
 
-type YouTubeCommand = "mute" | "playVideo" | "setVolume" | "unMute";
+type PlaybackState = 'idle' | 'loading' | 'playing' | 'paused' | 'error'
+
+type YouTubePlayer = {
+  destroy: () => void
+  getIframe: () => HTMLIFrameElement
+  mute: () => void
+  playVideo: () => void
+  setVolume: (volume: number) => void
+  unMute: () => void
+}
+
+type YouTubePlayerEvent = {
+  target: YouTubePlayer
+}
+
+type YouTubePlayerStateEvent = YouTubePlayerEvent & {
+  data: number
+}
+
+type YouTubePlayerOptions = {
+  height: string
+  width: string
+  videoId: string
+  host: string
+  playerVars: Record<string, number | string>
+  events: {
+    onReady: (event: YouTubePlayerEvent) => void
+    onStateChange: (event: YouTubePlayerStateEvent) => void
+    onError: () => void
+  }
+}
+
+type YouTubeApi = {
+  Player: new (
+    element: HTMLElement,
+    options: YouTubePlayerOptions,
+  ) => YouTubePlayer
+  PlayerState: {
+    ENDED: number
+    PLAYING: number
+    PAUSED: number
+    CUED: number
+  }
+}
+
+declare global {
+  interface Window {
+    YT?: YouTubeApi
+    onYouTubeIframeAPIReady?: () => void
+  }
+}
+
+let youtubeApiPromise: Promise<YouTubeApi> | null = null
+
+function loadYouTubeApi() {
+  if (window.YT?.Player) return Promise.resolve(window.YT)
+  if (youtubeApiPromise) return youtubeApiPromise
+
+  youtubeApiPromise = new Promise<YouTubeApi>((resolve, reject) => {
+    const previousReadyCallback = window.onYouTubeIframeAPIReady
+
+    window.onYouTubeIframeAPIReady = () => {
+      previousReadyCallback?.()
+
+      if (window.YT?.Player) {
+        resolve(window.YT)
+      } else {
+        reject(new Error('YouTube Player API không khởi tạo được'))
+      }
+    }
+
+    if (document.querySelector('script[data-youtube-player-api]')) return
+
+    const script = document.createElement('script')
+    script.src = 'https://www.youtube.com/iframe_api'
+    script.async = true
+    script.dataset.youtubePlayerApi = 'true'
+    script.addEventListener('error', () => {
+      youtubeApiPromise = null
+      reject(new Error('Không tải được YouTube Player API'))
+    })
+    document.head.append(script)
+  })
+
+  return youtubeApiPromise
+}
 
 export type MusicPlayerHandle = {
-  play: () => void;
-};
+  play: () => void
+}
 
 type MusicPlayerProps = {
-  visible: boolean;
-};
+  visible: boolean
+}
 
-function SoundIcon({ muted }: { muted: boolean }) {
+function SoundIcon({
+  muted,
+  playing,
+}: {
+  muted: boolean
+  playing: boolean
+}) {
   return (
     <svg className="music-control-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4.5 9.25h3.25l4.1-3.35v12.2l-4.1-3.35H4.5z" />
-      {muted ? (
-        <>
-          <path d="m15.7 9 4.3 4.3" />
-          <path d="m20 9-4.3 4.3" />
-        </>
+      {!playing ? (
+        <path className="music-control-play" d="m8.5 6.2 9 5.8-9 5.8z" />
       ) : (
         <>
-          <path d="M15.5 9.15a4.1 4.1 0 0 1 0 5.7" />
-          <path d="M18.1 6.9a7.3 7.3 0 0 1 0 10.2" />
+          <path d="M4.5 9.25h3.25l4.1-3.35v12.2l-4.1-3.35H4.5z" />
+          {muted ? (
+            <>
+              <path d="m15.7 9 4.3 4.3" />
+              <path d="m20 9-4.3 4.3" />
+            </>
+          ) : (
+            <>
+              <path d="M15.5 9.15a4.1 4.1 0 0 1 0 5.7" />
+              <path d="M18.1 6.9a7.3 7.3 0 0 1 0 10.2" />
+            </>
+          )}
         </>
       )}
     </svg>
-  );
+  )
 }
 
 const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(
   function MusicPlayer({ visible }, ref) {
-    const iframeRef = useRef<HTMLIFrameElement>(null);
-    const playRequestedRef = useRef(false);
-    const [isMuted, setIsMuted] = useState(false);
+    const playerHostRef = useRef<HTMLDivElement>(null)
+    const playerRef = useRef<YouTubePlayer>(null)
+    const playerReadyRef = useRef(false)
+    const playRequestedRef = useRef(false)
+    const [isMuted, setIsMuted] = useState(false)
+    const [playbackState, setPlaybackState] =
+      useState<PlaybackState>('idle')
 
-    const sendCommand = (command: YouTubeCommand, args: number[] = []) => {
-      iframeRef.current?.contentWindow?.postMessage(
-        JSON.stringify({
-          event: "command",
-          func: command,
-          args,
-        }),
-        youtubeOrigin,
-      );
-    };
+    const startPlayer = (player = playerRef.current) => {
+      if (!player) return
+
+      player.setVolume(48)
+      player.unMute()
+      player.playVideo()
+    }
 
     const startMusic = () => {
-      playRequestedRef.current = true;
-      setIsMuted(false);
-      sendCommand("setVolume", [48]);
-      sendCommand("unMute");
-      sendCommand("playVideo");
-    };
+      playRequestedRef.current = true
+      setIsMuted(false)
+      setPlaybackState('loading')
 
-    useImperativeHandle(ref, () => ({ play: startMusic }));
+      if (playerReadyRef.current) startPlayer()
+    }
 
-    const handlePlayerLoad = () => {
-      if (!playRequestedRef.current) return;
+    useImperativeHandle(ref, () => ({ play: startMusic }))
 
-      sendCommand("setVolume", [48]);
-      sendCommand("unMute");
-      sendCommand("playVideo");
-    };
+    useEffect(() => {
+      let cancelled = false
 
-    const toggleMute = () => {
-      const nextMuted = !isMuted;
+      loadYouTubeApi()
+        .then((youtube) => {
+          if (cancelled || !playerHostRef.current) return
 
-      setIsMuted(nextMuted);
-      sendCommand(nextMuted ? "mute" : "unMute");
+          const player = new youtube.Player(playerHostRef.current, {
+            width: '200',
+            height: '200',
+            videoId,
+            host: youtubeOrigin,
+            playerVars: {
+              autoplay: 0,
+              controls: 0,
+              disablekb: 1,
+              loop: 1,
+              origin: window.location.origin,
+              playlist: videoId,
+              playsinline: 1,
+              rel: 0,
+            },
+            events: {
+              onReady: (event) => {
+                playerRef.current = event.target
+                playerReadyRef.current = true
 
-      if (!nextMuted) sendCommand("playVideo");
-    };
+                const iframe = event.target.getIframe()
+                iframe.title = 'Mãi mãi bên nhau - Noo Phước Thịnh'
+                iframe.tabIndex = -1
+                iframe.setAttribute('aria-hidden', 'true')
+                iframe.referrerPolicy = 'strict-origin-when-cross-origin'
+
+                if (playRequestedRef.current) startPlayer(event.target)
+              },
+              onStateChange: (event) => {
+                if (event.data === youtube.PlayerState.PLAYING) {
+                  setPlaybackState('playing')
+                  return
+                }
+
+                if (
+                  playRequestedRef.current &&
+                  (event.data === youtube.PlayerState.PAUSED ||
+                    event.data === youtube.PlayerState.ENDED ||
+                    event.data === youtube.PlayerState.CUED)
+                ) {
+                  setPlaybackState('paused')
+                }
+              },
+              onError: () => setPlaybackState('error'),
+            },
+          })
+
+          playerRef.current = player
+        })
+        .catch(() => {
+          if (!cancelled) setPlaybackState('error')
+        })
+
+      return () => {
+        cancelled = true
+        playerReadyRef.current = false
+        playerRef.current?.destroy()
+        playerRef.current = null
+      }
+    }, [])
+
+    const handleControlClick = () => {
+      if (playbackState !== 'playing') {
+        startMusic()
+        return
+      }
+
+      const nextMuted = !isMuted
+
+      setIsMuted(nextMuted)
+      playerRef.current?.[nextMuted ? 'mute' : 'unMute']()
+    }
+
+    const isPlaying = playbackState === 'playing'
+    const controlLabel = !isPlaying
+      ? playbackState === 'error'
+        ? 'Thử phát lại bài Mãi mãi bên nhau'
+        : 'Phát bài Mãi mãi bên nhau'
+      : isMuted
+        ? 'Bật âm thanh bài Mãi mãi bên nhau'
+        : 'Tắt âm thanh bài Mãi mãi bên nhau'
 
     return (
       <>
-        <iframe
-          ref={iframeRef}
-          className="music-player-frame"
-          src={`${youtubeOrigin}/embed/${videoId}?enablejsapi=1&controls=0&disablekb=1&playsinline=1&loop=1&playlist=${videoId}&rel=0`}
-          title="Mãi mãi bên nhau - Noo Phước Thịnh"
-          allow="autoplay; encrypted-media"
-          referrerPolicy="strict-origin-when-cross-origin"
-          aria-hidden="true"
-          tabIndex={-1}
-          onLoad={handlePlayerLoad}
-        />
+        <div className="music-player-frame" aria-hidden="true">
+          <div ref={playerHostRef} />
+        </div>
         {visible && (
           <button
             className="music-control"
             type="button"
-            aria-label={
-              isMuted
-                ? "Bật âm thanh bài Mãi mãi bên nhau"
-                : "Tắt âm thanh bài Mãi mãi bên nhau"
-            }
-            aria-pressed={isMuted}
-            onClick={toggleMute}
+            aria-label={controlLabel}
+            aria-pressed={isPlaying && isMuted}
+            data-playback-state={playbackState}
+            onClick={handleControlClick}
           >
-            <SoundIcon muted={isMuted} />
+            <SoundIcon muted={isMuted} playing={isPlaying} />
           </button>
         )}
       </>
-    );
+    )
   },
-);
+)
 
-export default MusicPlayer;
+export default MusicPlayer
