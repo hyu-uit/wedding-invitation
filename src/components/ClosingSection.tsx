@@ -1,4 +1,4 @@
-import closingCouple from '../assets/photos/closing-couple.jpg'
+import closingCouple from '../assets/photos/closing-final.jpg'
 
 function ClosingSection() {
   return (
