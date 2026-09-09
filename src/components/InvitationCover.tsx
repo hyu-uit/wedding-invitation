@@ -120,7 +120,7 @@ function InvitationCover({ onOpening, onOpened }: InvitationCoverProps) {
 
           <div className="cover-guest">
             <span>Kính mời</span>
-            <strong>Quý gia đình</strong>
+            <strong>QUÝ GIA ĐÌNH</strong>
           </div>
 
           <p className="cover-invite-note">
