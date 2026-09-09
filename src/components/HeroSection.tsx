@@ -1,4 +1,4 @@
-import dragon from "../assets/dragon-wall-decal-hero.png";
+import dragonPhoenix from "../assets/dragon-phoenix.png";
 import floralSprig from "../assets/floral-sprig.png";
 
 function HeroSection() {
@@ -26,7 +26,7 @@ function HeroSection() {
 
       <img
         className="hero-dragon"
-        src={dragon}
+        src={dragonPhoenix}
         alt=""
         aria-hidden="true"
       />

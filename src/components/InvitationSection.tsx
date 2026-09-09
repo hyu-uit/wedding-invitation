@@ -96,6 +96,23 @@ function InvitationSection() {
 
         <p className="wedding-lunar">(Nhằm Ngày 18 tháng 08 năm Bính Ngọ)</p>
       </div>
+
+      <div className="wedding-timeline" aria-label="Lịch trình tiệc cưới">
+        <ol>
+          <li>
+            <time dateTime="2026-09-28T16:00:00+07:00">16:00 - 18:00</time>
+            <span>Check in photobook</span>
+          </li>
+          <li>
+            <time dateTime="2026-09-28T19:00:00+07:00">19:00</time>
+            <span>Pháo hoa</span>
+          </li>
+          <li>
+            <time dateTime="2026-09-28T21:00:00+07:00">21:00 - 23:00</time>
+            <span>DJ</span>
+          </li>
+        </ol>
+      </div>
     </section>
   );
 }
