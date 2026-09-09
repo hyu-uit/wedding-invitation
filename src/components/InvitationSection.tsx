@@ -101,7 +101,7 @@ function InvitationSection() {
         <ol>
           <li>
             <time dateTime="2026-09-28T16:00:00+07:00">16:00 - 18:00</time>
-            <span>Check in photobook</span>
+            <span>Check in Photobooth</span>
           </li>
           <li>
             <time dateTime="2026-09-28T19:00:00+07:00">19:00 - 20:00</time>
