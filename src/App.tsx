@@ -4,13 +4,11 @@ import gsap from 'gsap'
 
 import './App.css'
 import AddressSection from './components/AddressSection'
-import CeremonySection from './components/CeremonySection'
 import ClosingSection from './components/ClosingSection'
 import GallerySection from './components/GallerySection'
 import HeroSection from './components/HeroSection'
 import InvitationSection from './components/InvitationSection'
 import InvitationCover from './components/InvitationCover'
-import FloatingPetals from './components/FloatingPetals'
 import MusicPlayer, {
   type MusicPlayerHandle,
 } from './components/MusicPlayer'
@@ -115,12 +113,10 @@ function App() {
           onOpened={() => setCoverVisible(false)}
         />
       )}
-      <FloatingPetals />
       <MusicPlayer ref={musicPlayerRef} visible={!coverVisible} />
       <main ref={invitationRef} className="invitation">
         <HeroSection />
         <InvitationSection />
-        <CeremonySection />
         <WelcomeSection />
         <AddressSection />
         <GallerySection />

@@ -27,7 +27,7 @@ Bridge and Bloom distribute a direct link to invited guests. Guests are expected
 - Support RSVP, adding the event to a calendar, music, and invitation sharing.
 - Add a guest-wish modal in a future phase.
 - Remain usable as a shared-link, single-page web experience.
-- The couple are Huyền Trân and Nhựt Hòa; the supplied wedding date is 16 September 2026 at 09:00.
+- The couple are Huyền Trân and Nhựt Hòa; the supplied wedding date is 28 September 2026 at 15:00.
 - The invitation language is Vietnamese, with short decorative English labels where supplied by the approved references.
 - Production deployment target and exact privacy behavior remain undecided.
 

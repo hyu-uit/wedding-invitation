@@ -97,9 +97,9 @@ function CeremonySection() {
       </figure>
 
       <p className="ceremony-script">We got married</p>
-      <h2 id="ceremony-title">LỄ VU QUY</h2>
+      <h2 id="ceremony-title">LỄ TÂN HÔN</h2>
 
-      <div className="ceremony-date" aria-label="Thời gian lễ vu quy">
+      <div className="ceremony-date" aria-label="Thời gian lễ tân hôn">
         <div className="ceremony-date-side ceremony-date-month">
           <span className="ceremony-rule" aria-hidden="true" />
           <span>THÁNG 09</span>
@@ -107,12 +107,12 @@ function CeremonySection() {
         </div>
 
         <div className="ceremony-date-center">
-          <span>THỨ TƯ</span>
-          <time ref={dayRef} className="ceremony-day" dateTime="2026-09-16">
-            16
+          <span>THỨ HAI</span>
+          <time ref={dayRef} className="ceremony-day" dateTime="2026-09-28">
+            28
           </time>
-          <time className="ceremony-time" dateTime="2026-09-16T09:00:00+07:00">
-            09:00
+          <time className="ceremony-time" dateTime="2026-09-28T15:00:00+07:00">
+            15:00
           </time>
         </div>
 
@@ -124,8 +124,8 @@ function CeremonySection() {
       </div>
 
       <div className="ceremony-lunar">
-        <p>(Nhằm ngày 06 tháng 08 năm Bính Ngọ)</p>
-        <p>(Nhóm họ 05 tháng 08 năm Bính Ngọ)</p>
+        <p>(Nhằm ngày 18 tháng 08 năm Bính Ngọ)</p>
+        <p>(Nhóm họ 17 tháng 08 năm Bính Ngọ)</p>
       </div>
     </section>
   );

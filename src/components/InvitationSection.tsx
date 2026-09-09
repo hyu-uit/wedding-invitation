@@ -1,78 +1,100 @@
-import bridePortrait from "../assets/photos/bride.jpg";
-import groomPortrait from "../assets/photos/groom.jpg";
-import BowMark from "./BowMark";
+import dragon from "../assets/dragon-wall-decal.png";
+import floralSprig from "../assets/floral-sprig.png";
+
+function CelebrationMark() {
+  return (
+    <svg
+      className="celebration-mark"
+      viewBox="0 0 64 48"
+      role="presentation"
+      aria-hidden="true"
+    >
+      <path d="M13 5h16l-2 14c-.6 4-3.4 7-7 8.3V41m-7 0h14M35 5h16l-2 14c-.6 4-3.4 7-7 8.3V41m-7 0h14" />
+      <path d="M14.5 16h13M36.5 16h13" />
+      <path d="m20 8 2.2 3.4 3.8 1.1-2.5 3 0 4-3.5-1.5-3.5 1.5v-4l-2.5-3 3.8-1.1L20 8Zm22 0 2.2 3.4 3.8 1.1-2.5 3 0 4-3.5-1.5-3.5 1.5v-4l-2.5-3 3.8-1.1L42 8Z" />
+    </svg>
+  );
+}
 
 function InvitationSection() {
   return (
     <section className="details-section" aria-labelledby="invitation-title">
-      <div className="petals" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
+      <img className="details-dragon" src={dragon} alt="" aria-hidden="true" />
+      <img
+        className="details-floral details-floral-top"
+        src={floralSprig}
+        alt=""
+        aria-hidden="true"
+      />
+      <img
+        className="details-floral details-floral-bottom"
+        src={floralSprig}
+        alt=""
+        aria-hidden="true"
+      />
 
       <header className="invitation-heading">
         <h2 id="invitation-title">Thư mời tiệc cưới</h2>
-        <div className="heading-rule" aria-hidden="true" />
-        <p>
-          <span>Thứ Tư</span>
-          <span className="event-separator" aria-hidden="true" />
-          <span>09:00</span>
-        </p>
-        <time dateTime="2026-09-16T09:00:00+07:00">16.09.2026</time>
+        <p>Trân trọng kính mời</p>
+        <strong>QUÝ GIA ĐÌNH</strong>
       </header>
+
+      <h3 className="families-title">Thông tin lễ cưới</h3>
 
       <div className="families">
         <article className="family">
-          <div className="family-copy">
-            <h3>Nhà gái</h3>
-            <div className="family-parents">
-              <p>Ông Dương Văn Mẫn</p>
-              <p>Bà Lê Thị Huệ</p>
-            </div>
-            <address>
-              Ấp Hồng Hạnh, Xã Giồng Riềng
-              <br />
-              Tỉnh An Giang
-            </address>
+          <h4>Nhà Trai</h4>
+          <div className="family-parents">
+            <p>Bà Dương Thị Yến Xuân</p>
           </div>
-          <img
-            src={bridePortrait}
-            alt="Chân dung cô dâu Huyền Trân"
-            loading="lazy"
-          />
-          <div className="person-title">
-            <p>Bride</p>
-            <h3>Huyền Trân</h3>
-          </div>
+          <address>
+            Ấp Đường Gỗ Vàm
+            <br />
+            Xã Long Thạnh Tỉnh An Giang
+          </address>
         </article>
+
+        <span className="families-separator" aria-hidden="true">
+          <CelebrationMark />
+        </span>
 
         <article className="family">
-          <div className="family-copy">
-            <h3>Nhà trai</h3>
-            <div className="family-parents">
-              <p>Bà Dương Thị Yến Xuân</p>
-            </div>
-            <address>
-              Ấp Đường Gỗ Vàm, Xã Long Thạnh
-              <br />
-              Tỉnh An Giang
-            </address>
+          <h4>Nhà Gái</h4>
+          <div className="family-parents">
+            <p>Ông Dương Văn Mẫn</p>
+            <p>Bà Lê Thị Huệ</p>
           </div>
-          <img
-            src={groomPortrait}
-            alt="Chân dung chú rể Nhựt Hòa"
-            loading="lazy"
-          />
-          <div className="person-title">
-            <p>Groom</p>
-            <h3>Nhựt Hòa</h3>
-          </div>
+          <address>
+            Ấp Hồng Hạnh
+            <br />
+            Xã Giồng Riềng Tỉnh An Giang
+          </address>
         </article>
+      </div>
 
-        <BowMark className="families-bow" />
+      <div className="couple-lockup" aria-label="Cô dâu và chú rể">
+        <span>Huỳnh Nhựt Hòa</span>
+        <b>&amp;</b>
+        <span>Dương Lê Huyền Trân</span>
+      </div>
+
+      <div className="wedding-schedule">
+        <h3>Lễ tân hôn</h3>
+        <p>
+          <span>Thứ Hai</span>
+          <strong>Vào lúc 15:00</strong>
+        </p>
+
+        <div
+          className="wedding-date"
+          aria-label="Ngày cưới 28 tháng 09 năm 2026"
+        >
+          <span>Tháng 09</span>
+          <time dateTime="2026-09-28">28</time>
+          <span>Năm 2026</span>
+        </div>
+
+        <p className="wedding-lunar">(Nhằm Ngày 18 tháng 08 năm Bính Ngọ)</p>
       </div>
     </section>
   );
